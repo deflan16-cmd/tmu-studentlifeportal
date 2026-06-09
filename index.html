@@ -602,23 +602,31 @@ sb.auth.onAuthStateChange(async (event, session) => {
 });
 
 async function loadProfile(user) {
-  currentUser = user;
-  const { data: profile } = await sb.from('profiles').select('*').eq('id', user.id).single();
-  currentProfile = profile;
-  isAdmin = profile?.is_admin === true;
+  try {
+    currentUser = user;
+    const { data: profile, error } = await sb.from('profiles').select('*').eq('id', user.id).single();
+    if (error) console.error('Profile load error:', error);
+    currentProfile = profile;
+    isAdmin = profile?.is_admin === true;
 
-  const displayName = profile?.name || user.email;
-  document.getElementById('user-display').textContent = displayName;
-  document.getElementById('hero-name').textContent = displayName;
+    const displayName = profile?.name || user.email;
+    document.getElementById('user-display').textContent = displayName;
+    document.getElementById('hero-name').textContent = displayName;
 
-  if (isAdmin) {
-    document.getElementById('admin-badge').style.display = 'inline';
-    document.getElementById('nav-admin').style.display   = 'inline-flex';
+    if (isAdmin) {
+      document.getElementById('admin-badge').style.display = 'inline';
+      document.getElementById('nav-admin').style.display   = 'inline-flex';
+    }
+
+    document.getElementById('auth-screen').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    await loadAll();
+  } catch(e) {
+    console.error('loadProfile failed:', e);
+    // Show app anyway so user is not stuck
+    document.getElementById('auth-screen').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
   }
-
-  document.getElementById('auth-screen').style.display = 'none';
-  document.getElementById('app').style.display = 'block';
-  await loadAll();
 }
 
 // ── NAVIGATION ──
@@ -1071,7 +1079,10 @@ async function adminDel(table, id) {
 
 // ── LOAD ALL ──
 async function loadAll() {
-  await Promise.all([loadEvents(), loadThreads(), loadResources(), loadClubs()]);
+  try { await loadEvents();    } catch(e) { console.error('events', e); }
+  try { await loadThreads();   } catch(e) { console.error('threads', e); }
+  try { await loadResources(); } catch(e) { console.error('resources', e); }
+  try { await loadClubs();     } catch(e) { console.error('clubs', e); }
 }
 </script>
 </body>
