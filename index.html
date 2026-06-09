@@ -548,9 +548,17 @@ async function doLogin() {
   const pass  = document.getElementById('li-pass').value;
   if (!email || !pass) { setAuthMsg('Please fill in both fields.'); return; }
   const btn = document.getElementById('li-btn');
-  btn.disabled = true; btn.textContent = 'Signing in...';
-  const { error } = await sb.auth.signInWithPassword({ email, password: pass });
-  if (error) { setAuthMsg(error.message); btn.disabled=false; btn.innerHTML='<i class="ti ti-login"></i> Sign in'; }
+  btn.disabled = true; btn.innerHTML = '<i class="ti ti-loader"></i> Signing in...';
+  const { data, error } = await sb.auth.signInWithPassword({ email, password: pass });
+  if (error) {
+    setAuthMsg(error.message);
+    btn.disabled = false;
+    btn.innerHTML = '<i class="ti ti-login"></i> Sign in';
+    return;
+  }
+  if (data?.user) {
+    await loadProfile(data.user);
+  }
 }
 
 async function doSignup() {
@@ -588,7 +596,9 @@ async function doLogout() {
 }
 
 sb.auth.onAuthStateChange(async (event, session) => {
-  if (session?.user && !currentUser) await loadProfile(session.user);
+  if (event === 'SIGNED_IN' && session?.user && !currentUser) {
+    await loadProfile(session.user);
+  }
 });
 
 async function loadProfile(user) {
