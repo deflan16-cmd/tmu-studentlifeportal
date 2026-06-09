@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TMU Medicine — Student Portal</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+:root{
+  --navy:#1A3A6B; --navy-light:#2a4f8a; --gold:#F5C518;
+  --sky:#E8F4FB; --white:#fff;
+  --gray-50:#F7FAFF; --gray-100:#EEF3FA; --gray-200:#D8E3F0;
+  --gray-400:#8FA3C0; --text:#1E2D42; --text-muted:#5A728A;
+  --radius:10px; --radius-lg:14px;
+  --shadow:0 1px 3px rgba(26,58,107,0.08),0 1px 2px rgba(26,58,107,0.04);
+  --shadow-md:0 4px 16px rgba(26,58,107,0.12);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--sky);color:var(--text);min-height:100vh;font-size:15px;line-height:1.6;}
+
+/* ── AUTH SCREEN ── */
+.auth-screen{min-height:100vh;background:var(--navy);display:flex;align-items:center;justify-content:center;padding:2rem;background-image:radial-gradient(ellipse at 20% 50%,rgba(245,197,24,0.08) 0%,transparent 60%);}
+.auth-card{background:white;border-radius:var(--radius-lg);width:440px;max-width:100%;padding:40px 38px 30px;box-shadow:0 24px 80px rgba(0,0,0,0.35);}
+.auth-logo{display:flex;align-items:center;gap:14px;margin-bottom:32px;}
+.auth-logo .tmu-mark{background:var(--navy);}
+.auth-logo .logo-text .main{font-size:18px;font-weight:600;color:var(--navy);display:block;}
+.auth-logo .logo-text .sub{font-size:12px;color:var(--text-muted);display:block;}
+.auth-tabs{display:flex;margin-bottom:26px;border-bottom:1px solid var(--gray-200);}
+.auth-tab{flex:1;background:none;border:none;padding:11px;font-size:14px;font-weight:600;font-family:'DM Sans',sans-serif;cursor:pointer;color:var(--text-muted);border-bottom:2px solid transparent;margin-bottom:-1px;transition:all 0.15s;}
+.auth-tab.active{color:var(--navy);border-bottom-color:var(--navy);}
+.auth-form{display:flex;flex-direction:column;gap:16px;}
+.field label{font-size:13px;font-weight:600;color:var(--navy);display:block;margin-bottom:5px;}
+.auth-input{width:100%;border:1px solid var(--gray-200);border-radius:var(--radius);padding:10px 14px;font-size:14px;font-family:'DM Sans',sans-serif;color:var(--text);outline:none;transition:border 0.15s;}
+.auth-input:focus{border-color:var(--navy);box-shadow:0 0 0 3px rgba(26,58,107,0.1);}
+.auth-msg{font-size:13px;padding:10px 14px;border-radius:var(--radius);display:none;}
+.auth-msg.error{background:#FCEBEB;color:#A32D2D;display:block;}
+.auth-msg.success{background:#E1F5EE;color:#0F6E56;display:block;}
+.auth-divider{text-align:center;font-size:12px;color:var(--text-muted);margin:4px 0;}
+
+/* ── TOPBAR ── */
+.topbar{background:var(--navy);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:62px;position:sticky;top:0;z-index:100;box-shadow:0 2px 10px rgba(0,0,0,0.25);}
+.logo-wrap{display:flex;align-items:center;gap:12px;cursor:pointer;}
+.tmu-mark{position:relative;background:var(--navy);border:2.5px solid white;padding:5px 10px;font-size:18px;font-weight:700;color:white;letter-spacing:1px;line-height:1;font-family:'DM Sans',sans-serif;}
+.tmu-mark::after{content:'';position:absolute;top:-6px;right:-6px;width:13px;height:13px;background:var(--gold);}
+.logo-text .main{font-size:16px;font-weight:600;color:white;display:block;}
+.logo-text .sub{font-size:11px;color:rgba(255,255,255,0.6);display:block;}
+.nav{display:flex;gap:2px;}
+.nav-btn{background:transparent;border:none;color:rgba(255,255,255,0.75);font-size:13px;font-family:'DM Sans',sans-serif;padding:7px 14px;border-radius:8px;cursor:pointer;transition:all 0.15s;font-weight:500;display:flex;align-items:center;gap:5px;}
+.nav-btn:hover{background:rgba(255,255,255,0.1);color:white;}
+.nav-btn.active{background:var(--gold);color:var(--navy);font-weight:600;}
+.topbar-right{display:flex;align-items:center;gap:8px;}
+.admin-badge{background:var(--gold);color:var(--navy);font-size:10px;font-weight:700;border-radius:20px;padding:2px 8px;letter-spacing:0.5px;}
+.user-chip{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:8px;padding:5px 12px;display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;color:rgba(255,255,255,0.85);transition:background 0.15s;}
+.user-chip:hover{background:rgba(255,255,255,0.15);}
+
+/* ── HERO ── */
+.hero{background:var(--navy);color:white;padding:2.5rem 2rem 3rem;}
+.hero-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;}
+.hero h1{font-family:'DM Serif Display',serif;font-size:28px;font-weight:400;margin-bottom:8px;}
+.hero p{font-size:14px;color:rgba(255,255,255,0.75);max-width:420px;line-height:1.65;}
+.hero-stats{display:flex;gap:12px;flex-shrink:0;}
+.stat-pill{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:var(--radius-lg);padding:12px 20px;text-align:center;min-width:110px;}
+.stat-pill .n{font-size:26px;font-weight:600;color:var(--gold);display:block;font-family:'DM Serif Display',serif;}
+.stat-pill .l{font-size:11px;color:rgba(255,255,255,0.7);margin-top:2px;}
+
+/* ── ANN BAR ── */
+.ann-bar{background:var(--gold);padding:9px 2rem;display:flex;align-items:center;gap:10px;font-size:13px;font-weight:600;color:var(--navy);}
+.new-pill{background:var(--navy);color:var(--gold);border-radius:20px;padding:2px 9px;font-size:11px;font-weight:700;}
+
+/* ── LAYOUT ── */
+.page{max-width:1100px;margin:0 auto;padding:1.5rem 2rem 3rem;}
+.grid{display:grid;grid-template-columns:1fr 300px;gap:1.5rem;}
+.main-col,.sidebar{display:flex;flex-direction:column;gap:1.5rem;}
+.section{display:none;}.section.active{display:block;}
+
+/* ── CARD ── */
+.card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow);}
+.card-header{padding:13px 18px 11px;border-bottom:1px solid var(--gray-100);display:flex;align-items:center;justify-content:space-between;background:var(--gray-50);}
+.card-header-left{display:flex;align-items:center;gap:9px;}
+.card-header-left>i{font-size:18px;color:var(--navy);}
+.card-title{font-size:14px;font-weight:600;color:var(--navy);}
+.see-all-btn{font-size:12px;color:var(--navy);background:none;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;opacity:0.65;}
+.see-all-btn:hover{opacity:1;}
+
+/* ── TAGS ── */
+.tag{border-radius:20px;padding:2px 9px;font-size:11px;font-weight:600;}
+.tag-navy{background:#E8F0FB;color:var(--navy);}
+.tag-gold{background:#FEF8E1;color:#7A6000;}
+.tag-teal{background:#E1F5EE;color:#0F6E56;}
+.tag-purple{background:#EEEDFE;color:#3C3489;}
+
+/* ── EVENTS ── */
+.event-item{padding:12px 18px;border-bottom:1px solid var(--gray-100);display:flex;gap:14px;align-items:flex-start;}
+.event-item:last-child{border-bottom:none;}
+.event-date{background:var(--sky);border:1px solid var(--gray-200);color:var(--navy);border-radius:var(--radius);padding:5px 10px;text-align:center;min-width:50px;flex-shrink:0;}
+.event-date .day{font-size:20px;font-weight:600;display:block;font-family:'DM Serif Display',serif;}
+.event-date .mon{font-size:11px;font-weight:600;color:var(--text-muted);}
+.event-info{flex:1;min-width:0;}
+.event-info .name{font-size:14px;font-weight:600;margin-bottom:4px;}
+.event-meta{display:flex;gap:10px;flex-wrap:wrap;align-items:center;font-size:12px;color:var(--text-muted);}
+.event-meta i{font-size:13px;vertical-align:-1px;margin-right:2px;}
+
+/* ── FORUM ── */
+.forum-item{padding:13px 18px;border-bottom:1px solid var(--gray-100);cursor:pointer;transition:background 0.1s;}
+.forum-item:last-child{border-bottom:none;}
+.forum-item:hover{background:var(--gray-50);}
+.forum-q{font-size:14px;font-weight:600;margin-bottom:5px;}
+.forum-preview{font-size:13px;color:var(--text-muted);margin-bottom:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:680px;}
+.forum-meta{font-size:12px;color:var(--text-muted);display:flex;gap:14px;align-items:center;flex-wrap:wrap;}
+.forum-meta i{font-size:13px;vertical-align:-1px;margin-right:2px;}
+
+/* ── RESOURCES ── */
+.resource-item{padding:11px 18px;border-bottom:1px solid var(--gray-100);display:flex;gap:12px;align-items:center;}
+.resource-item:last-child{border-bottom:none;}
+.resource-icon{width:38px;height:38px;border-radius:var(--radius);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+.ri-pdf{background:#FCEBEB;color:#A32D2D;}
+.ri-link{background:#E8F0FB;color:var(--navy);}
+.ri-video{background:#EEEDFE;color:#3C3489;}
+.ri-book{background:#E1F5EE;color:#0F6E56;}
+.resource-info{flex:1;min-width:0;}
+.resource-name{font-size:13px;font-weight:600;}
+.resource-sub{font-size:12px;color:var(--text-muted);}
+.res-link{font-size:11px;color:var(--navy);word-break:break-all;display:block;margin-top:2px;}
+
+/* ── CLUBS ── */
+.clubs-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;}
+.club-item{padding:16px 18px;border-right:1px solid var(--gray-100);border-bottom:1px solid var(--gray-100);cursor:pointer;transition:background 0.1s;}
+.club-item:nth-child(even){border-right:none;}
+.club-item:hover{background:var(--gray-50);}
+.club-icon-wrap{width:38px;height:38px;background:var(--sky);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;margin-bottom:10px;}
+.club-icon-wrap i{font-size:20px;color:var(--navy);}
+.club-name{font-size:14px;font-weight:600;margin-bottom:4px;}
+.club-desc{font-size:12px;color:var(--text-muted);margin-bottom:10px;line-height:1.5;}
+.club-foot{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px;}
+.join-btn{background:transparent;border:1px solid var(--navy);color:var(--navy);border-radius:20px;padding:4px 14px;font-size:12px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.15s;}
+.join-btn:hover{background:var(--navy);color:white;}
+.join-btn.joined{background:var(--navy);color:white;}
+
+/* ── ANNOUNCEMENTS ── */
+.ann-item{padding:12px 18px;border-bottom:1px solid var(--gray-100);}
+.ann-item:last-child{border-bottom:none;}
+.ann-title{font-size:13px;font-weight:600;margin-bottom:3px;}
+.ann-body{font-size:12px;color:var(--text-muted);line-height:1.5;}
+.ann-time{font-size:11px;color:var(--gray-400);margin-top:4px;}
+
+/* ── BUTTONS ── */
+.post-area{padding:12px 18px;border-top:1px solid var(--gray-100);background:var(--gray-50);}
+.btn-primary{background:var(--navy);color:white;border:none;border-radius:var(--radius);padding:9px 18px;font-size:13px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background 0.15s;display:inline-flex;align-items:center;gap:6px;}
+.btn-primary:hover{background:var(--navy-light);}
+.btn-primary:disabled{opacity:0.6;cursor:not-allowed;}
+.btn-secondary{background:white;color:var(--navy);border:1px solid var(--gray-200);border-radius:var(--radius);padding:8px 16px;font-size:13px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.15s;display:inline-flex;align-items:center;gap:6px;}
+.btn-secondary:hover{border-color:var(--navy);}
+.btn-danger{background:none;border:none;color:#c0392b;font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif;padding:3px 8px;border-radius:6px;display:inline-flex;align-items:center;gap:4px;transition:background 0.1s;flex-shrink:0;}
+.btn-danger:hover{background:#FCEBEB;}
+.btn-gold{background:var(--gold);color:var(--navy);border:none;border-radius:var(--radius);padding:9px 18px;font-size:13px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;display:inline-flex;align-items:center;gap:6px;}
+
+/* ── MODAL ── */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:200;align-items:center;justify-content:center;}
+.modal-overlay.open{display:flex;}
+.modal{background:white;border-radius:var(--radius-lg);width:540px;max-width:95vw;max-height:90vh;overflow-y:auto;box-shadow:0 24px 70px rgba(0,0,0,0.28);}
+.modal-header{padding:18px 22px 14px;border-bottom:1px solid var(--gray-100);display:flex;align-items:center;justify-content:space-between;}
+.modal-title{font-size:16px;font-weight:600;color:var(--navy);}
+.modal-close{background:none;border:none;font-size:22px;color:var(--text-muted);cursor:pointer;line-height:1;}
+.modal-body{padding:20px 22px;display:flex;flex-direction:column;gap:14px;}
+.modal-footer{padding:14px 22px;border-top:1px solid var(--gray-100);display:flex;gap:10px;justify-content:flex-end;}
+label{font-size:13px;font-weight:600;color:var(--navy);display:block;margin-bottom:5px;}
+input[type=text],input[type=email],input[type=password],input[type=date],select,textarea{width:100%;border:1px solid var(--gray-200);border-radius:var(--radius);padding:9px 13px;font-size:13px;font-family:'DM Sans',sans-serif;color:var(--text);background:white;outline:none;transition:border 0.15s;}
+input:focus,select:focus,textarea:focus{border-color:var(--navy);box-shadow:0 0 0 3px rgba(26,58,107,0.1);}
+textarea{resize:vertical;min-height:90px;line-height:1.6;}
+
+/* ── PAGE HEADER ── */
+.page-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;}
+.page-title{font-family:'DM Serif Display',serif;font-size:24px;color:var(--navy);}
+
+/* ── THREAD VIEW ── */
+.thread-back{background:none;border:none;color:var(--navy);font-size:13px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;display:flex;align-items:center;gap:5px;margin-bottom:1rem;}
+.thread-back:hover{text-decoration:underline;}
+.thread-card{background:white;border:1px solid var(--gray-200);border-radius:var(--radius-lg);padding:20px 22px;margin-bottom:1rem;box-shadow:var(--shadow);}
+.thread-title{font-family:'DM Serif Display',serif;font-size:20px;color:var(--navy);margin-bottom:8px;}
+.thread-meta{font-size:12px;color:var(--text-muted);margin-bottom:14px;display:flex;gap:14px;flex-wrap:wrap;align-items:center;}
+.thread-body{font-size:14px;line-height:1.7;}
+.reply-card{background:white;border:1px solid var(--gray-200);border-radius:var(--radius-lg);padding:15px 18px;margin-bottom:10px;box-shadow:var(--shadow);}
+.reply-author-row{font-size:12px;font-weight:600;color:var(--navy);margin-bottom:6px;display:flex;align-items:center;justify-content:space-between;}
+.reply-body{font-size:13px;line-height:1.65;}
+.reply-input-area{background:white;border:1px solid var(--gray-200);border-radius:var(--radius-lg);padding:16px 18px;box-shadow:var(--shadow);}
+
+/* ── RESOURCE TYPE PICKER ── */
+.type-select{display:flex;gap:10px;flex-wrap:wrap;}
+.type-opt{flex:1;min-width:80px;border:1.5px solid var(--gray-200);border-radius:var(--radius);padding:10px 8px;text-align:center;cursor:pointer;transition:all 0.15s;font-size:12px;font-weight:500;color:var(--text-muted);}
+.type-opt i{font-size:22px;display:block;margin-bottom:4px;}
+.type-opt.selected{border-color:var(--navy);background:var(--sky);color:var(--navy);}
+.type-opt:hover:not(.selected){border-color:var(--gray-400);}
+
+/* ── ADMIN PANEL ── */
+.admin-hero{background:linear-gradient(135deg,#122952,#1A3A6B);border-radius:var(--radius-lg);padding:22px 24px;margin-bottom:1.5rem;color:white;}
+.admin-hero h2{font-family:'DM Serif Display',serif;font-size:22px;font-weight:400;margin-bottom:4px;display:flex;align-items:center;gap:10px;}
+.admin-hero p{font-size:13px;color:rgba(255,255,255,0.7);}
+.admin-stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-top:16px;}
+.admin-stat-box{background:rgba(255,255,255,0.1);border-radius:var(--radius);padding:14px 16px;}
+.admin-stat-box .n{font-size:24px;font-weight:600;color:var(--gold);font-family:'DM Serif Display',serif;}
+.admin-stat-box .l{font-size:12px;color:rgba(255,255,255,0.65);margin-top:2px;}
+.admin-row{padding:10px 18px;border-bottom:1px solid var(--gray-100);display:flex;justify-content:space-between;align-items:center;font-size:13px;gap:12px;}
+.admin-row:last-child{border-bottom:none;}
+.admin-row-info{flex:1;min-width:0;}
+.admin-row-info strong{display:block;font-weight:600;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.admin-row-info span{font-size:12px;color:var(--text-muted);}
+
+/* ── EMPTY / LOADING ── */
+.empty{padding:2.5rem;text-align:center;color:var(--text-muted);font-size:13px;}
+.empty i{font-size:36px;display:block;margin-bottom:8px;opacity:0.3;}
+.loading{padding:2rem;text-align:center;color:var(--text-muted);font-size:13px;}
+.spinner{width:24px;height:24px;border:2.5px solid var(--gray-200);border-top-color:var(--navy);border-radius:50%;animation:spin 0.7s linear infinite;margin:0 auto 10px;}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+/* ── TOAST ── */
+.toast{position:fixed;bottom:24px;right:24px;background:var(--navy);color:white;padding:12px 18px;border-radius:var(--radius);font-size:13px;font-weight:500;box-shadow:var(--shadow-md);z-index:999;transform:translateY(80px);opacity:0;transition:all 0.3s;display:flex;align-items:center;gap:8px;}
+.toast.show{transform:translateY(0);opacity:1;}
+.toast.success{background:#0F6E56;}
+.toast.error{background:#A32D2D;}
+
+/* ── RESPONSIVE ── */
+@media(max-width:768px){
+  .grid{grid-template-columns:1fr;}
+  .clubs-grid{grid-template-columns:1fr;}
+  .topbar{padding:0 1rem;}
+  .nav-btn span{display:none;}
+  .hero-stats{flex-wrap:wrap;}
+  .page{padding:1rem 1rem 3rem;}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════ AUTH SCREEN ═══════════════════════ -->
+<div id="auth-screen" class="auth-screen">
+  <div class="auth-card">
+    <div class="auth-logo">
+      <div class="tmu-mark">TMU</div>
+      <div class="logo-text">
+        <span class="main">Medicine</span>
+        <span class="sub">Student Portal</span>
+      </div>
+    </div>
+    <div class="auth-tabs">
+      <button class="auth-tab active" onclick="switchTab('login')">Sign in</button>
+      <button class="auth-tab" onclick="switchTab('signup')">Create account</button>
+    </div>
+    <div id="auth-msg" class="auth-msg"></div>
+
+    <div id="login-form" class="auth-form">
+      <div class="field"><label>Email</label><input class="auth-input" type="email" id="li-email" placeholder="your@email.com" onkeydown="if(event.key==='Enter')doLogin()"></div>
+      <div class="field"><label>Password</label><input class="auth-input" type="password" id="li-pass" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()"></div>
+      <button class="btn-primary" style="width:100%;justify-content:center;padding:11px;" onclick="doLogin()" id="li-btn"><i class="ti ti-login"></i> Sign in</button>
+    </div>
+
+    <div id="signup-form" class="auth-form" style="display:none;">
+      <div class="field"><label>Full name</label><input class="auth-input" type="text" id="su-name" placeholder="e.g. Sarah Mitchell"></div>
+      <div class="field"><label>Year</label>
+        <select class="auth-input" id="su-year">
+          <option value="">Select your year...</option>
+          <option>1st Year</option><option>2nd Year</option><option>3rd Year</option>
+          <option>4th Year</option><option>Resident</option><option>Faculty</option>
+        </select>
+      </div>
+      <div class="field"><label>Email</label><input class="auth-input" type="email" id="su-email" placeholder="your@torontomu.ca"></div>
+      <div class="field"><label>Password</label><input class="auth-input" type="password" id="su-pass" placeholder="Min. 6 characters" onkeydown="if(event.key==='Enter')doSignup()"></div>
+      <button class="btn-primary" style="width:100%;justify-content:center;padding:11px;" onclick="doSignup()" id="su-btn"><i class="ti ti-user-plus"></i> Create account</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════ MAIN APP ═══════════════════════ -->
+<div id="app" style="display:none;">
+
+<!-- ── MODALS ── -->
+
+<!-- Event modal -->
+<div class="modal-overlay" id="event-modal">
+  <div class="modal">
+    <div class="modal-header"><span class="modal-title">Add an event</span><button class="modal-close" onclick="closeModal('event-modal')"><i class="ti ti-x"></i></button></div>
+    <div class="modal-body">
+      <div><label>Event name</label><input type="text" id="ev-name" placeholder="e.g. Study group — Cardiology"></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <div><label>Date</label><input type="date" id="ev-date"></div>
+        <div><label>Time</label><input type="text" id="ev-time" placeholder="e.g. 2:00 PM"></div>
+      </div>
+      <div><label>Location</label><input type="text" id="ev-loc" placeholder="e.g. Room 204 / Zoom"></div>
+      <div><label>Category</label>
+        <select id="ev-cat"><option>Workshop</option><option>Exam prep</option><option>Wellness</option><option>Research</option><option>Social</option><option>Club</option><option>Other</option></select>
+      </div>
+    </div>
+    <div class="modal-footer"><button class="btn-secondary" onclick="closeModal('event-modal')">Cancel</button><button class="btn-primary" onclick="submitEvent()"><i class="ti ti-check"></i> Post event</button></div>
+  </div>
+</div>
+
+<!-- Forum modal -->
+<div class="modal-overlay" id="forum-modal">
+  <div class="modal">
+    <div class="modal-header"><span class="modal-title">Ask a question</span><button class="modal-close" onclick="closeModal('forum-modal')"><i class="ti ti-x"></i></button></div>
+    <div class="modal-body">
+      <div><label>Question title</label><input type="text" id="fo-title" placeholder="What do you want to know?"></div>
+      <div><label>Details (optional)</label><textarea id="fo-body" placeholder="Add more context..."></textarea></div>
+      <div><label>Category</label>
+        <select id="fo-cat"><option>Studying</option><option>Exams</option><option>Clerkship</option><option>Admin</option><option>Wellness</option><option>Research</option><option>General</option></select>
+      </div>
+    </div>
+    <div class="modal-footer"><button class="btn-secondary" onclick="closeModal('forum-modal')">Cancel</button><button class="btn-primary" onclick="submitForum()"><i class="ti ti-send"></i> Post question</button></div>
+  </div>
+</div>
+
+<!-- Resource modal -->
+<div class="modal-overlay" id="resource-modal">
+  <div class="modal">
+    <div class="modal-header"><span class="modal-title">Share a resource</span><button class="modal-close" onclick="closeModal('resource-modal')"><i class="ti ti-x"></i></button></div>
+    <div class="modal-body">
+      <div><label>Resource type</label>
+        <div class="type-select">
+          <div class="type-opt selected" data-type="pdf" onclick="selectType(this)"><i class="ti ti-file-type-pdf"></i>PDF</div>
+          <div class="type-opt" data-type="video" onclick="selectType(this)"><i class="ti ti-player-play"></i>Video</div>
+          <div class="type-opt" data-type="book" onclick="selectType(this)"><i class="ti ti-book"></i>Textbook</div>
+          <div class="type-opt" data-type="link" onclick="selectType(this)"><i class="ti ti-link"></i>Link</div>
+        </div>
+      </div>
+      <div><label>Title</label><input type="text" id="re-title" placeholder="e.g. Pathophysiology notes — Block 3"></div>
+      <div><label>Link (optional)</label><input type="text" id="re-link" placeholder="https://..."></div>
+      <div><label>Section</label><select id="re-sub"><option value="videos">Videos</option><option value="textbooks">Textbooks</option><option value="other">Other</option></select></div>
+      <div><label>Notes (optional)</label><textarea id="re-notes" placeholder="Any context for fellow students..." style="min-height:60px;"></textarea></div>
+    </div>
+    <div class="modal-footer"><button class="btn-secondary" onclick="closeModal('resource-modal')">Cancel</button><button class="btn-primary" onclick="submitResource()"><i class="ti ti-upload"></i> Share</button></div>
+  </div>
+</div>
+
+<!-- Club modal -->
+<div class="modal-overlay" id="club-modal">
+  <div class="modal">
+    <div class="modal-header"><span class="modal-title">Add a club</span><button class="modal-close" onclick="closeModal('club-modal')"><i class="ti ti-x"></i></button></div>
+    <div class="modal-body">
+      <div><label>Club name</label><input type="text" id="cl-name" placeholder="e.g. Emergency Medicine Society"></div>
+      <div><label>Description</label><textarea id="cl-desc" placeholder="What is this club about? Who should join?"></textarea></div>
+      <div><label>How to join / contact</label><input type="text" id="cl-join" placeholder="e.g. Email medclub@torontomu.ca"></div>
+      <div><label>Link (optional)</label><input type="text" id="cl-link" placeholder="https://... sign-up form, Instagram, etc."></div>
+    </div>
+    <div class="modal-footer"><button class="btn-secondary" onclick="closeModal('club-modal')">Cancel</button><button class="btn-primary" onclick="submitClub()"><i class="ti ti-plus"></i> Create club</button></div>
+  </div>
+</div>
+
+<!-- Club detail modal -->
+<div class="modal-overlay" id="club-detail-modal">
+  <div class="modal">
+    <div class="modal-header"><span class="modal-title" id="cd-title"></span><button class="modal-close" onclick="closeModal('club-detail-modal')"><i class="ti ti-x"></i></button></div>
+    <div class="modal-body" id="cd-body"></div>
+    <div class="modal-footer" id="cd-footer"></div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<!-- ── TOPBAR ── -->
+<div class="topbar">
+  <div class="logo-wrap" onclick="showSection('home')">
+    <div class="tmu-mark">TMU</div>
+    <div class="logo-text"><span class="main">Medicine</span><span class="sub">Student Portal</span></div>
+  </div>
+  <nav class="nav">
+    <button class="nav-btn active" onclick="showSection('home')" id="nav-home"><i class="ti ti-home"></i><span>Home</span></button>
+    <button class="nav-btn" onclick="showSection('events')" id="nav-events"><i class="ti ti-calendar"></i><span>Events</span></button>
+    <button class="nav-btn" onclick="showSection('forum')" id="nav-forum"><i class="ti ti-messages"></i><span>Forum</span></button>
+    <button class="nav-btn" onclick="showSection('resources')" id="nav-resources"><i class="ti ti-books"></i><span>Resources</span></button>
+    <button class="nav-btn" onclick="showSection('clubs')" id="nav-clubs"><i class="ti ti-users-group"></i><span>Clubs</span></button>
+    <button class="nav-btn" onclick="showSection('admin')" id="nav-admin" style="display:none;"><i class="ti ti-shield"></i><span>Admin</span></button>
+  </nav>
+  <div class="topbar-right">
+    <span class="admin-badge" id="admin-badge" style="display:none;">ADMIN</span>
+    <div class="user-chip" onclick="doLogout()">
+      <i class="ti ti-user-circle"></i>
+      <span id="user-display">...</span>
+      <i class="ti ti-logout" style="font-size:14px;opacity:0.55;"></i>
+    </div>
+  </div>
+</div>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="hero-inner">
+    <div>
+      <h1>Welcome, <span id="hero-name">med student</span> 👋</h1>
+      <p>Your hub for events, study resources, clubs, and peer support — everything you need at TMU Medicine.</p>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-pill"><span class="n" id="stat-events">–</span><span class="l">Events this month</span></div>
+      <div class="stat-pill"><span class="n" id="stat-threads">–</span><span class="l">Discussions</span></div>
+      <div class="stat-pill"><span class="n" id="stat-resources">–</span><span class="l">Resources shared</span></div>
+    </div>
+  </div>
+</div>
+<div class="ann-bar"><i class="ti ti-speakerphone"></i><strong>Announcement:</strong>&nbsp;OSCE prep session added for June 15 — register by June 12.<span class="new-pill">New</span></div>
+
+<!-- ── HOME ── -->
+<div class="section active" id="section-home">
+  <div class="page">
+    <div class="grid">
+      <div class="main-col">
+        <div class="card">
+          <div class="card-header"><div class="card-header-left"><i class="ti ti-calendar-event"></i><span class="card-title">Upcoming events</span></div><button class="see-all-btn" onclick="showSection('events')">See all →</button></div>
+          <div id="home-events-list"><div class="loading"><div class="spinner"></div>Loading...</div></div>
+          <div class="post-area"><button class="btn-primary" onclick="openModal('event-modal')"><i class="ti ti-plus"></i> Add an event</button></div>
+        </div>
+        <div class="card">
+          <div class="card-header"><div class="card-header-left"><i class="ti ti-messages"></i><span class="card-title">Recent discussions</span></div><button class="see-all-btn" onclick="showSection('forum')">See all →</button></div>
+          <div id="home-forum-list"><div class="loading"><div class="spinner"></div>Loading...</div></div>
+          <div class="post-area"><button class="btn-primary" onclick="openModal('forum-modal')"><i class="ti ti-plus"></i> Ask a question</button></div>
+        </div>
+      </div>
+      <div class="sidebar">
+        <div class="card">
+          <div class="card-header"><div class="card-header-left"><i class="ti ti-speakerphone"></i><span class="card-title">Announcements</span></div></div>
+          <div class="ann-item"><div class="ann-title">OSCE prep added June 15</div><div class="ann-body">Register by June 12 — spots limited to 30 students.</div><div class="ann-time">Today</div></div>
+          <div class="ann-item"><div class="ann-title">Library hours extended</div><div class="ann-body">Sim lab and library open until midnight during exam period.</div><div class="ann-time">Yesterday</div></div>
+          <div class="ann-item"><div class="ann-title">Clerkship placements out</div><div class="ann-body">Check your student portal for 3rd year rotation assignments.</div><div class="ann-time">June 5</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── EVENTS ── -->
+<div class="section" id="section-events">
+  <div class="page">
+    <div class="page-header"><h2 class="page-title">Events</h2><button class="btn-primary" onclick="openModal('event-modal')"><i class="ti ti-plus"></i> Add an event</button></div>
+    <div class="card"><div id="all-events-list"><div class="loading"><div class="spinner"></div>Loading...</div></div></div>
+  </div>
+</div>
+
+<!-- ── FORUM ── -->
+<div class="section" id="section-forum">
+  <div id="forum-list-view">
+    <div class="page">
+      <div class="page-header"><h2 class="page-title">Q&A Forum</h2><button class="btn-primary" onclick="openModal('forum-modal')"><i class="ti ti-plus"></i> Ask a question</button></div>
+      <div class="card"><div id="all-forum-list"><div class="loading"><div class="spinner"></div>Loading...</div></div></div>
+    </div>
+  </div>
+  <div id="forum-thread-view" style="display:none;">
+    <div class="page">
+      <button class="thread-back" onclick="showForumList()"><i class="ti ti-arrow-left"></i> Back to forum</button>
+      <div id="thread-content"></div>
+      <div class="reply-input-area">
+        <div style="margin-bottom:10px;font-size:14px;font-weight:600;color:var(--navy);">Add a reply</div>
+        <textarea id="reply-input" placeholder="Share your answer or thoughts..." style="margin-bottom:10px;"></textarea>
+        <button class="btn-primary" onclick="submitReply()"><i class="ti ti-send"></i> Post reply</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── RESOURCES ── -->
+<div class="section" id="section-resources">
+  <div class="page">
+    <div class="page-header"><h2 class="page-title">Resources</h2><button class="btn-primary" onclick="openModal('resource-modal')"><i class="ti ti-upload"></i> Share a resource</button></div>
+    <div style="display:flex;flex-direction:column;gap:1.25rem;">
+      <div class="card"><div class="card-header"><div class="card-header-left"><i class="ti ti-player-play"></i><span class="card-title">Videos</span></div></div><div id="res-videos-list"><div class="loading"><div class="spinner"></div>Loading...</div></div></div>
+      <div class="card"><div class="card-header"><div class="card-header-left"><i class="ti ti-book"></i><span class="card-title">Textbooks</span></div></div><div id="res-textbooks-list"><div class="loading"><div class="spinner"></div>Loading...</div></div></div>
+      <div class="card"><div class="card-header"><div class="card-header-left"><i class="ti ti-files"></i><span class="card-title">Other resources</span></div></div><div id="res-other-list"><div class="loading"><div class="spinner"></div>Loading...</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ── CLUBS ── -->
+<div class="section" id="section-clubs">
+  <div class="page">
+    <div class="page-header"><h2 class="page-title">Student Clubs</h2><button class="btn-primary" onclick="openModal('club-modal')"><i class="ti ti-plus"></i> Add a club</button></div>
+    <div class="card"><div class="clubs-grid" id="clubs-grid"><div class="loading" style="grid-column:1/-1;"><div class="spinner"></div>Loading...</div></div></div>
+  </div>
+</div>
+
+<!-- ── ADMIN ── -->
+<div class="section" id="section-admin">
+  <div class="page">
+    <div class="admin-hero">
+      <h2><i class="ti ti-shield-check"></i> Admin Panel</h2>
+      <p>Full control over all portal content. Only you can see this.</p>
+      <div class="admin-stats-grid">
+        <div class="admin-stat-box"><div class="n" id="adm-n-users">–</div><div class="l">Registered users</div></div>
+        <div class="admin-stat-box"><div class="n" id="adm-n-events">–</div><div class="l">Total events</div></div>
+        <div class="admin-stat-box"><div class="n" id="adm-n-threads">–</div><div class="l">Forum threads</div></div>
+        <div class="admin-stat-box"><div class="n" id="adm-n-resources">–</div><div class="l">Resources shared</div></div>
+        <div class="admin-stat-box"><div class="n" id="adm-n-clubs">–</div><div class="l">Clubs</div></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:1.25rem;">
+      <div class="card"><div class="card-header"><div class="card-header-left"><i class="ti ti-users"></i><span class="card-title">All users</span></div></div><div id="adm-users"><div class="loading"><div class="spinner"></div>Loading...</div></div></div>
+      <div class="card"><div class="card-header"><div class="card-header-left"><i class="ti ti-calendar"></i><span class="card-title">All events</span></div></div><div id="adm-events"></div></div>
+      <div class="card"><div class="card-header"><div class="card-header-left"><i class="ti ti-messages"></i><span class="card-title">All forum threads</span></div></div><div id="adm-threads"></div></div>
+      <div class="card"><div class="card-header"><div class="card-header-left"><i class="ti ti-books"></i><span class="card-title">All resources</span></div></div><div id="adm-resources"></div></div>
+      <div class="card"><div class="card-header"><div class="card-header-left"><i class="ti ti-users-group"></i><span class="card-title">All clubs</span></div></div><div id="adm-clubs"></div></div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /#app -->
+
+<script>
+// ╔══════════════════════════════════════════════════════╗
+// ║  PASTE YOUR SUPABASE CREDENTIALS HERE               ║
+// ╚══════════════════════════════════════════════════════╝
+const SUPABASE_URL     = 'https://udmjwzfdsiqcavitdvab.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVkbWp3emZkc2lxY2F2aXRkdmFiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODEwMTUxNTMsImV4cCI6MjA5NjU5MTE1M30.Dd6auFPqmunleFc8PharqH74qeV4mQHBXGVz7Sp5wKw';
+
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+// ── GLOBALS ──
+let currentUser    = null;
+let currentProfile = null;
+let isAdmin        = false;
+let currentThread  = null;
+let selResType     = 'pdf';
+
+// ── TOAST ──
+function toast(msg, type='success') {
+  const t = document.getElementById('toast');
+  t.textContent = ''; t.className = 'toast ' + type;
+  const icon = document.createElement('i');
+  icon.className = type === 'success' ? 'ti ti-check' : 'ti ti-alert-circle';
+  t.appendChild(icon);
+  t.appendChild(document.createTextNode(' ' + msg));
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+// ── AUTH ──
+function switchTab(tab) {
+  document.querySelectorAll('.auth-tab').forEach((el, i) => el.classList.toggle('active', (i===0)===(tab==='login')));
+  document.getElementById('login-form').style.display  = tab==='login'  ? 'flex' : 'none';
+  document.getElementById('signup-form').style.display = tab==='signup' ? 'flex' : 'none';
+  setAuthMsg('');
+}
+
+function setAuthMsg(msg, type='error') {
+  const el = document.getElementById('auth-msg');
+  el.textContent = msg;
+  el.className = 'auth-msg' + (msg ? ' ' + type : '');
+}
+
+async function doLogin() {
+  const email = document.getElementById('li-email').value.trim();
+  const pass  = document.getElementById('li-pass').value;
+  if (!email || !pass) { setAuthMsg('Please fill in both fields.'); return; }
+  const btn = document.getElementById('li-btn');
+  btn.disabled = true; btn.textContent = 'Signing in...';
+  const { error } = await sb.auth.signInWithPassword({ email, password: pass });
+  if (error) { setAuthMsg(error.message); btn.disabled=false; btn.innerHTML='<i class="ti ti-login"></i> Sign in'; }
+}
+
+async function doSignup() {
+  const name  = document.getElementById('su-name').value.trim();
+  const year  = document.getElementById('su-year').value;
+  const email = document.getElementById('su-email').value.trim();
+  const pass  = document.getElementById('su-pass').value;
+  if (!name || !email || !pass) { setAuthMsg('Please fill in all required fields.'); return; }
+  if (pass.length < 6) { setAuthMsg('Password must be at least 6 characters.'); return; }
+  const btn = document.getElementById('su-btn');
+  btn.disabled = true; btn.textContent = 'Creating account...';
+  const { data, error } = await sb.auth.signUp({
+    email, password: pass,
+    options: { data: { name, year } }
+  });
+  if (error) { setAuthMsg(error.message); btn.disabled=false; btn.innerHTML='<i class="ti ti-user-plus"></i> Create account'; return; }
+  if (data.user) {
+    // Insert profile (trigger also does this, belt-and-suspenders)
+    await sb.from('profiles').upsert({ id: data.user.id, name, year: year||null }, { onConflict: 'id' });
+    if (data.session) {
+      // Email confirmation disabled — logged in immediately
+      await loadProfile(data.user);
+    } else {
+      setAuthMsg('Account created! Check your email to confirm, then sign in.', 'success');
+      btn.disabled=false; btn.innerHTML='<i class="ti ti-user-plus"></i> Create account';
+    }
+  }
+}
+
+async function doLogout() {
+  await sb.auth.signOut();
+  currentUser=null; currentProfile=null; isAdmin=false;
+  document.getElementById('app').style.display='none';
+  document.getElementById('auth-screen').style.display='flex';
+}
+
+sb.auth.onAuthStateChange(async (event, session) => {
+  if (session?.user && !currentUser) await loadProfile(session.user);
+});
+
+async function loadProfile(user) {
+  currentUser = user;
+  const { data: profile } = await sb.from('profiles').select('*').eq('id', user.id).single();
+  currentProfile = profile;
+  isAdmin = profile?.is_admin === true;
+
+  const displayName = profile?.name || user.email;
+  document.getElementById('user-display').textContent = displayName;
+  document.getElementById('hero-name').textContent = displayName;
+
+  if (isAdmin) {
+    document.getElementById('admin-badge').style.display = 'inline';
+    document.getElementById('nav-admin').style.display   = 'inline-flex';
+  }
+
+  document.getElementById('auth-screen').style.display = 'none';
+  document.getElementById('app').style.display = 'block';
+  await loadAll();
+}
+
+// ── NAVIGATION ──
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('section-' + id).classList.add('active');
+  document.getElementById('nav-' + id).classList.add('active');
+  window.scrollTo(0, 0);
+  if (id === 'admin' && isAdmin) loadAdminPanel();
+}
+
+function openModal(id)  { document.getElementById(id).classList.add('open'); }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+document.querySelectorAll('.modal-overlay').forEach(m => {
+  m.addEventListener('click', e => { if (e.target === m) closeModal(m.id); });
+});
+
+// ── HELPERS ──
+const CAT_TAG = {
+  Workshop:'tag-teal','Exam prep':'tag-gold',Wellness:'tag-purple',
+  Research:'tag-navy',Social:'tag-teal',Club:'tag-navy',Other:'tag-navy',
+  Studying:'tag-gold',Exams:'tag-teal',Clerkship:'tag-purple',
+  Admin:'tag-navy',General:'tag-navy'
+};
+const tag = cat => `<span class="tag ${CAT_TAG[cat]||'tag-navy'}">${cat}</span>`;
+
+function fmtDate(d) {
+  const dt = new Date(d + 'T00:00:00');
+  return { day: dt.getDate(), mon: ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'][dt.getMonth()] };
+}
+function timeAgo(ts) {
+  const s = Math.floor((Date.now() - new Date(ts)) / 1000);
+  if (s < 60) return 'Just now';
+  const m = Math.floor(s/60), h = Math.floor(m/60), d = Math.floor(h/24);
+  if (d > 0) return d + 'd ago';
+  if (h > 0) return h + 'h ago';
+  return m + 'm ago';
+}
+const canDel = authorId => isAdmin || currentUser?.id === authorId;
+function esc(s) { const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+
+// ── EVENTS ──
+async function loadEvents() {
+  const { data } = await sb.from('events').select('*').order('date', { ascending: true });
+  const all = data || [];
+  renderEvents('home-events-list', all, 4);
+  renderEvents('all-events-list',  all, null);
+  // Update stat
+  const now = new Date();
+  const n = all.filter(e => { const d = new Date(e.date+'T00:00:00'); return d.getMonth()===now.getMonth()&&d.getFullYear()===now.getFullYear(); }).length;
+  document.getElementById('stat-events').textContent = n;
+}
+
+function renderEvents(cid, list, limit) {
+  const el = document.getElementById(cid); if (!el) return;
+  const show = limit ? list.slice(0, limit) : list;
+  if (!show.length) { el.innerHTML = '<div class="empty"><i class="ti ti-calendar-off"></i>No events yet — add the first one!</div>'; return; }
+  el.innerHTML = show.map(ev => {
+    const { day, mon } = fmtDate(ev.date);
+    const delBtn = canDel(ev.author_id) ? `<button class="btn-danger" onclick="event.stopPropagation();deleteEvent(${ev.id})"><i class="ti ti-trash"></i> Delete</button>` : '';
+    return `<div class="event-item">
+      <div class="event-date"><span class="day">${day}</span><span class="mon">${mon}</span></div>
+      <div class="event-info">
+        <div class="name">${esc(ev.name)}</div>
+        <div class="event-meta">
+          <span><i class="ti ti-clock"></i>${esc(ev.time||'TBD')}</span>
+          <span><i class="ti ti-map-pin"></i>${esc(ev.location||'TBD')}</span>
+          ${tag(ev.category)}
+          <span style="color:var(--gray-400)">by ${esc(ev.author_name)}</span>
+          ${delBtn}
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+async function deleteEvent(id) {
+  const { error } = await sb.from('events').delete().eq('id', id);
+  if (error) { toast('Error deleting event.', 'error'); return; }
+  toast('Event deleted.');
+  await loadEvents();
+}
+
+async function submitEvent() {
+  const name = document.getElementById('ev-name').value.trim();
+  const date = document.getElementById('ev-date').value;
+  if (!name || !date) { alert('Please fill in event name and date.'); return; }
+  const { error } = await sb.from('events').insert({
+    name, date,
+    time:     document.getElementById('ev-time').value.trim() || 'TBD',
+    location: document.getElementById('ev-loc').value.trim()  || 'TBD',
+    category: document.getElementById('ev-cat').value,
+    author_id:   currentUser.id,
+    author_name: currentProfile?.name || currentUser.email
+  });
+  if (error) { toast('Error posting event.', 'error'); return; }
+  closeModal('event-modal');
+  ['ev-name','ev-time','ev-loc'].forEach(i => document.getElementById(i).value = '');
+  document.getElementById('ev-date').value = '';
+  toast('Event posted!');
+  await loadEvents();
+}
+
+// ── FORUM ──
+async function loadThreads() {
+  const { data } = await sb.from('threads').select('*, replies(count)').order('created_at', { ascending: false });
+  const all = data || [];
+  renderForum('home-forum-list', all, 3);
+  renderForum('all-forum-list',  all, null);
+  document.getElementById('stat-threads').textContent = all.length;
+}
+
+function renderForum(cid, list, limit) {
+  const el = document.getElementById(cid); if (!el) return;
+  const show = limit ? list.slice(0, limit) : list;
+  if (!show.length) { el.innerHTML = '<div class="empty"><i class="ti ti-message-off"></i>No discussions yet — start one!</div>'; return; }
+  el.innerHTML = show.map(th => {
+    const cnt = th.replies?.[0]?.count || 0;
+    const delBtn = canDel(th.author_id) ? `<button class="btn-danger" onclick="event.stopPropagation();deleteThread(${th.id})"><i class="ti ti-trash"></i></button>` : '';
+    return `<div class="forum-item" onclick="openThread(${th.id})">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;">
+        <div class="forum-q">${esc(th.title)}</div>${delBtn}
+      </div>
+      <div class="forum-preview">${esc(th.body||'')}</div>
+      <div class="forum-meta">
+        <span><i class="ti ti-user"></i>${esc(th.author_name)}</span>
+        <span><i class="ti ti-message"></i>${cnt} ${cnt===1?'reply':'replies'}</span>
+        <span><i class="ti ti-clock"></i>${timeAgo(th.created_at)}</span>
+        ${tag(th.category)}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+async function deleteThread(id) {
+  const { error } = await sb.from('threads').delete().eq('id', id);
+  if (error) { toast('Error deleting post.', 'error'); return; }
+  if (currentThread?.id === id) showForumList();
+  toast('Post deleted.');
+  await loadThreads();
+}
+
+async function submitForum() {
+  const title = document.getElementById('fo-title').value.trim();
+  if (!title) { alert('Please enter a question title.'); return; }
+  const { error } = await sb.from('threads').insert({
+    title, body: document.getElementById('fo-body').value.trim() || null,
+    category:    document.getElementById('fo-cat').value,
+    author_id:   currentUser.id,
+    author_name: currentProfile?.name || currentUser.email
+  });
+  if (error) { toast('Error posting question.', 'error'); return; }
+  closeModal('forum-modal');
+  document.getElementById('fo-title').value = '';
+  document.getElementById('fo-body').value  = '';
+  toast('Question posted!');
+  await loadThreads();
+}
+
+async function openThread(id) {
+  const { data: th }      = await sb.from('threads').select('*').eq('id', id).single();
+  const { data: replies } = await sb.from('replies').select('*').eq('thread_id', id).order('created_at');
+  currentThread = { ...th, replies: replies || [] };
+  document.getElementById('forum-list-view').style.display   = 'none';
+  document.getElementById('forum-thread-view').style.display = 'block';
+  renderThreadView();
+}
+
+function renderThreadView() {
+  const t = currentThread;
+  const delBtn = canDel(t.author_id) ? `<button class="btn-danger" onclick="deleteThread(${t.id});showForumList();"><i class="ti ti-trash"></i> Delete post</button>` : '';
+  let html = `<div class="thread-card">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;gap:8px;">
+      <div class="thread-title">${esc(t.title)}</div>${delBtn}
+    </div>
+    <div class="thread-meta">
+      <span><i class="ti ti-user" style="font-size:13px;margin-right:3px;"></i>${esc(t.author_name)}</span>
+      <span><i class="ti ti-clock" style="font-size:13px;margin-right:3px;"></i>${timeAgo(t.created_at)}</span>
+      ${tag(t.category)}
+    </div>
+    <div class="thread-body">${t.body ? esc(t.body) : '<em style="color:var(--text-muted)">No additional details provided.</em>'}</div>
+  </div>`;
+
+  html += `<div style="font-size:13px;font-weight:600;color:var(--text-muted);margin-bottom:10px;">${t.replies.length} ${t.replies.length===1?'reply':'replies'}</div>`;
+
+  t.replies.forEach(r => {
+    const rDel = canDel(r.author_id) ? `<button class="btn-danger" onclick="deleteReply(${r.id})"><i class="ti ti-trash"></i></button>` : '';
+    html += `<div class="reply-card">
+      <div class="reply-author-row">
+        <span><i class="ti ti-user" style="font-size:13px;margin-right:4px;vertical-align:-1px;"></i><strong>${esc(r.author_name)}</strong> <span style="font-weight:400;color:var(--text-muted);">· ${timeAgo(r.created_at)}</span></span>
+        ${rDel}
+      </div>
+      <div class="reply-body">${esc(r.body)}</div>
+    </div>`;
+  });
+
+  document.getElementById('thread-content').innerHTML = html;
+  document.getElementById('reply-input').value = '';
+}
+
+async function deleteReply(id) {
+  const { error } = await sb.from('replies').delete().eq('id', id);
+  if (error) { toast('Error deleting reply.', 'error'); return; }
+  toast('Reply deleted.');
+  await openThread(currentThread.id);
+  await loadThreads();
+}
+
+function showForumList() {
+  document.getElementById('forum-list-view').style.display   = 'block';
+  document.getElementById('forum-thread-view').style.display = 'none';
+  currentThread = null;
+}
+
+async function submitReply() {
+  const body = document.getElementById('reply-input').value.trim();
+  if (!body) return;
+  const { error } = await sb.from('replies').insert({
+    thread_id:   currentThread.id,
+    body,
+    author_id:   currentUser.id,
+    author_name: currentProfile?.name || currentUser.email
+  });
+  if (error) { toast('Error posting reply.', 'error'); return; }
+  toast('Reply posted!');
+  await openThread(currentThread.id);
+  await loadThreads();
+}
+
+// ── RESOURCES ──
+const RES_ICON   = { pdf:'ri-pdf', video:'ri-video', book:'ri-book', link:'ri-link' };
+const RES_ICON_I = { pdf:'ti-file-type-pdf', video:'ti-player-play', book:'ti-book', link:'ti-link' };
+
+async function loadResources() {
+  const { data } = await sb.from('resources').select('*').order('created_at', { ascending: false });
+  const all = data || [];
+  ['videos','textbooks','other'].forEach(sec => {
+    const el = document.getElementById('res-' + sec + '-list'); if (!el) return;
+    const list = all.filter(r => r.section === sec);
+    if (!list.length) { el.innerHTML = '<div class="empty"><i class="ti ti-files"></i>Nothing here yet — share the first one!</div>'; return; }
+    el.innerHTML = list.map(r => {
+      const delBtn = canDel(r.author_id) ? `<button class="btn-danger" onclick="deleteResource(${r.id})"><i class="ti ti-trash"></i></button>` : '';
+      return `<div class="resource-item">
+        <div class="resource-icon ${RES_ICON[r.type]||'ri-link'}"><i class="ti ${RES_ICON_I[r.type]||'ti-link'}"></i></div>
+        <div class="resource-info">
+          <div class="resource-name">${esc(r.title)}</div>
+          <div class="resource-sub">Shared by ${esc(r.author_name)}${r.notes?' · '+esc(r.notes):''}</div>
+          ${r.link ? `<a class="res-link" href="${esc(r.link)}" target="_blank" rel="noopener">${esc(r.link)}</a>` : ''}
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">
+          ${r.link ? `<a href="${esc(r.link)}" target="_blank" rel="noopener"><i class="ti ti-external-link" style="font-size:18px;color:var(--gray-400);cursor:pointer;"></i></a>` : ''}
+          ${delBtn}
+        </div>
+      </div>`;
+    }).join('');
+  });
+  document.getElementById('stat-resources').textContent = all.length;
+}
+
+async function deleteResource(id) {
+  const { error } = await sb.from('resources').delete().eq('id', id);
+  if (error) { toast('Error deleting resource.', 'error'); return; }
+  toast('Resource removed.');
+  await loadResources();
+}
+
+function selectType(el) {
+  document.querySelectorAll('.type-opt').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected'); selResType = el.dataset.type;
+  const sub = document.getElementById('re-sub');
+  if (selResType==='video') sub.value='videos';
+  else if (selResType==='book') sub.value='textbooks';
+  else sub.value='other';
+}
+
+async function submitResource() {
+  const title = document.getElementById('re-title').value.trim();
+  if (!title) { alert('Please enter a title.'); return; }
+  const { error } = await sb.from('resources').insert({
+    title, type: selResType,
+    section: document.getElementById('re-sub').value,
+    link:    document.getElementById('re-link').value.trim()  || null,
+    notes:   document.getElementById('re-notes').value.trim() || null,
+    author_id:   currentUser.id,
+    author_name: currentProfile?.name || currentUser.email
+  });
+  if (error) { toast('Error sharing resource.', 'error'); return; }
+  closeModal('resource-modal');
+  ['re-title','re-link','re-notes'].forEach(i => document.getElementById(i).value = '');
+  toast('Resource shared!');
+  await loadResources();
+}
+
+// ── CLUBS ──
+async function loadClubs() {
+  const { data: clubs } = await sb.from('clubs').select('*, club_members(count)').order('created_at');
+  const { data: myMems } = await sb.from('club_members').select('club_id').eq('user_id', currentUser.id);
+  const joined = new Set((myMems||[]).map(m => m.club_id));
+  const el = document.getElementById('clubs-grid'); if (!el) return;
+  if (!clubs?.length) { el.innerHTML = '<div class="empty" style="grid-column:1/-1;"><i class="ti ti-users-group"></i>No clubs yet — create the first one!</div>'; return; }
+  el.innerHTML = clubs.map(c => {
+    const isJoined = joined.has(c.id);
+    const cnt = c.club_members?.[0]?.count || 0;
+    const delBtn = canDel(c.author_id) ? `<button class="btn-danger" onclick="event.stopPropagation();deleteClub(${c.id})"><i class="ti ti-trash"></i></button>` : '';
+    return `<div class="club-item" onclick="openClubDetail(${c.id})">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+        <div class="club-icon-wrap"><i class="ti ti-users-group"></i></div>${delBtn}
+      </div>
+      <div class="club-name">${esc(c.name)}</div>
+      <div class="club-desc">${esc(c.description||'')}</div>
+      <div class="club-foot">
+        <span style="font-size:11px;color:var(--text-muted);"><i class="ti ti-users" style="font-size:12px;vertical-align:-1px;margin-right:2px;"></i>${cnt} members</span>
+        <button class="join-btn ${isJoined?'joined':''}" onclick="event.stopPropagation();toggleJoin(${c.id},this)">${isJoined?'✓ Joined':'Join'}</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+async function openClubDetail(id) {
+  const { data: c }  = await sb.from('clubs').select('*').eq('id', id).single();
+  const { data: mc } = await sb.from('club_members').select('count').eq('club_id', id).single();
+  const { data: me } = await sb.from('club_members').select('club_id').eq('club_id', id).eq('user_id', currentUser.id).maybeSingle();
+  const isJoined = !!me;
+  const cnt = mc?.count || 0;
+  const delBtn = canDel(c.author_id) ? `<button class="btn-danger" onclick="deleteClub(${c.id});closeModal('club-detail-modal');"><i class="ti ti-trash"></i> Delete club</button>` : '';
+  document.getElementById('cd-title').textContent = c.name;
+  document.getElementById('cd-body').innerHTML = `
+    <div style="display:flex;align-items:center;gap:14px;margin-bottom:16px;">
+      <div style="width:50px;height:50px;background:var(--sky);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="ti ti-users-group" style="font-size:26px;color:var(--navy);"></i></div>
+      <div><div style="font-size:16px;font-weight:600;color:var(--navy);">${esc(c.name)}</div><div style="font-size:12px;color:var(--text-muted);">Created by ${esc(c.author_name)} · ${cnt} members</div></div>
+    </div>
+    <div><div style="font-size:13px;font-weight:600;color:var(--navy);margin-bottom:6px;">About</div><div style="font-size:13px;line-height:1.7;">${esc(c.description||'')}</div></div>
+    ${c.how_to_join?`<div><div style="font-size:13px;font-weight:600;color:var(--navy);margin-bottom:6px;">How to join</div><div style="font-size:13px;line-height:1.7;">${esc(c.how_to_join)}</div></div>`:''}
+    ${c.link?`<div><div style="font-size:13px;font-weight:600;color:var(--navy);margin-bottom:6px;">Link</div><a href="${esc(c.link)}" target="_blank" rel="noopener" style="font-size:13px;color:var(--navy);word-break:break-all;">${esc(c.link)}</a></div>`:''}
+  `;
+  document.getElementById('cd-footer').innerHTML = `
+    <button class="btn-secondary" onclick="closeModal('club-detail-modal')">Close</button>
+    <button id="cd-join-btn" class="join-btn ${isJoined?'joined':''}" style="padding:8px 20px;font-size:13px;" onclick="toggleJoin(${id}, this)">${isJoined?'✓ Joined':'Join'}</button>
+    ${delBtn}
+  `;
+  openModal('club-detail-modal');
+}
+
+async function toggleJoin(clubId, btn) {
+  const { data: existing } = await sb.from('club_members').select('club_id').eq('club_id', clubId).eq('user_id', currentUser.id).maybeSingle();
+  if (existing) {
+    await sb.from('club_members').delete().eq('club_id', clubId).eq('user_id', currentUser.id);
+    if (btn) { btn.classList.remove('joined'); btn.textContent = 'Join'; }
+    toast('Left club.');
+  } else {
+    await sb.from('club_members').insert({ club_id: clubId, user_id: currentUser.id });
+    if (btn) { btn.classList.add('joined'); btn.textContent = '✓ Joined'; }
+    toast('Joined club!');
+  }
+  await loadClubs();
+}
+
+async function deleteClub(id) {
+  const { error } = await sb.from('clubs').delete().eq('id', id);
+  if (error) { toast('Error deleting club.', 'error'); return; }
+  toast('Club deleted.');
+  await loadClubs();
+}
+
+async function submitClub() {
+  const name = document.getElementById('cl-name').value.trim();
+  const desc = document.getElementById('cl-desc').value.trim();
+  if (!name || !desc) { alert('Please fill in name and description.'); return; }
+  const { error } = await sb.from('clubs').insert({
+    name, description: desc,
+    how_to_join: document.getElementById('cl-join').value.trim() || null,
+    link:        document.getElementById('cl-link').value.trim() || null,
+    author_id:   currentUser.id,
+    author_name: currentProfile?.name || currentUser.email
+  });
+  if (error) { toast('Error creating club.', 'error'); return; }
+  closeModal('club-modal');
+  ['cl-name','cl-desc','cl-join','cl-link'].forEach(i => document.getElementById(i).value = '');
+  toast('Club created!');
+  await loadClubs();
+}
+
+// ── ADMIN PANEL ──
+async function loadAdminPanel() {
+  if (!isAdmin) return;
+  const [
+    { data: users }, { data: events }, { data: threads },
+    { data: resources }, { data: clubs }
+  ] = await Promise.all([
+    sb.from('profiles').select('*').order('created_at'),
+    sb.from('events').select('*').order('date'),
+    sb.from('threads').select('*').order('created_at', { ascending: false }),
+    sb.from('resources').select('*').order('created_at', { ascending: false }),
+    sb.from('clubs').select('*').order('created_at')
+  ]);
+
+  document.getElementById('adm-n-users').textContent     = users?.length     || 0;
+  document.getElementById('adm-n-events').textContent    = events?.length    || 0;
+  document.getElementById('adm-n-threads').textContent   = threads?.length   || 0;
+  document.getElementById('adm-n-resources').textContent = resources?.length || 0;
+  document.getElementById('adm-n-clubs').textContent     = clubs?.length     || 0;
+
+  // Users
+  document.getElementById('adm-users').innerHTML = (users||[]).length ? (users||[]).map(u => `
+    <div class="admin-row">
+      <div class="admin-row-info">
+        <strong>${esc(u.name)} ${u.is_admin?'<span class="admin-badge">ADMIN</span>':''}</strong>
+        <span>${u.year||'No year'} · Joined ${new Date(u.created_at).toLocaleDateString('en-CA')}</span>
+      </div>
+    </div>`).join('') : '<div class="empty"><i class="ti ti-users"></i>No users yet.</div>';
+
+  // Events
+  document.getElementById('adm-events').innerHTML = (events||[]).length ? (events||[]).map(e => `
+    <div class="admin-row">
+      <div class="admin-row-info"><strong>${esc(e.name)}</strong><span>${e.date} · by ${esc(e.author_name)}</span></div>
+      <button class="btn-danger" onclick="adminDel('events',${e.id})"><i class="ti ti-trash"></i> Delete</button>
+    </div>`).join('') : '<div class="empty"><i class="ti ti-calendar-off"></i>No events.</div>';
+
+  // Threads
+  document.getElementById('adm-threads').innerHTML = (threads||[]).length ? (threads||[]).map(t => `
+    <div class="admin-row">
+      <div class="admin-row-info"><strong>${esc(t.title)}</strong><span>by ${esc(t.author_name)} · ${timeAgo(t.created_at)}</span></div>
+      <button class="btn-danger" onclick="adminDel('threads',${t.id})"><i class="ti ti-trash"></i> Delete</button>
+    </div>`).join('') : '<div class="empty"><i class="ti ti-message-off"></i>No threads.</div>';
+
+  // Resources
+  document.getElementById('adm-resources').innerHTML = (resources||[]).length ? (resources||[]).map(r => `
+    <div class="admin-row">
+      <div class="admin-row-info"><strong>${esc(r.title)}</strong><span>by ${esc(r.author_name)} · ${r.section}</span></div>
+      <button class="btn-danger" onclick="adminDel('resources',${r.id})"><i class="ti ti-trash"></i> Delete</button>
+    </div>`).join('') : '<div class="empty"><i class="ti ti-files"></i>No resources.</div>';
+
+  // Clubs
+  document.getElementById('adm-clubs').innerHTML = (clubs||[]).length ? (clubs||[]).map(c => `
+    <div class="admin-row">
+      <div class="admin-row-info"><strong>${esc(c.name)}</strong><span>by ${esc(c.author_name)}</span></div>
+      <button class="btn-danger" onclick="adminDel('clubs',${c.id})"><i class="ti ti-trash"></i> Delete</button>
+    </div>`).join('') : '<div class="empty"><i class="ti ti-users-group"></i>No clubs.</div>';
+}
+
+async function adminDel(table, id) {
+  if (!confirm('Permanently delete this item?')) return;
+  const { error } = await sb.from(table).delete().eq('id', id);
+  if (error) { toast('Error: ' + error.message, 'error'); return; }
+  toast('Deleted.');
+  await loadAdminPanel();
+  await loadAll();
+}
+
+// ── LOAD ALL ──
+async function loadAll() {
+  await Promise.all([loadEvents(), loadThreads(), loadResources(), loadClubs()]);
+}
+</script>
+</body>
+</html>
