@@ -628,11 +628,8 @@ async function doLogout() {
   document.getElementById('li-pass').value='';
 }
 
-sb.auth.onAuthStateChange(async (event, session) => {
-  if (event === 'INITIAL_SESSION' && session?.user) {
-    await loadProfile(session.user);
-  }
-});
+// Always show login screen on page load — sign out any existing session
+sb.auth.signOut();
 
 async function loadProfile(user) {
   if (appLoading) return;
