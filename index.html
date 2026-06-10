@@ -8,19 +8,9 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
-:root{
-  --navy:#1A3A6B; --navy-light:#2a4f8a; --gold:#F5C518;
-  --sky:#E8F4FB; --white:#fff;
-  --gray-50:#F7FAFF; --gray-100:#EEF3FA; --gray-200:#D8E3F0;
-  --gray-400:#8FA3C0; --text:#1E2D42; --text-muted:#5A728A;
-  --radius:10px; --radius-lg:14px;
-  --shadow:0 1px 3px rgba(26,58,107,0.08),0 1px 2px rgba(26,58,107,0.04);
-  --shadow-md:0 4px 16px rgba(26,58,107,0.12);
-}
+:root{--navy:#1A3A6B;--navy-light:#2a4f8a;--gold:#F5C518;--sky:#E8F4FB;--white:#fff;--gray-50:#F7FAFF;--gray-100:#EEF3FA;--gray-200:#D8E3F0;--gray-400:#8FA3C0;--text:#1E2D42;--text-muted:#5A728A;--radius:10px;--radius-lg:14px;--shadow:0 1px 3px rgba(26,58,107,0.08),0 1px 2px rgba(26,58,107,0.04);--shadow-md:0 4px 16px rgba(26,58,107,0.12);}
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'DM Sans',sans-serif;background:var(--sky);color:var(--text);min-height:100vh;font-size:15px;line-height:1.6;}
-
-/* AUTH */
 .auth-screen{min-height:100vh;background:var(--navy);display:flex;align-items:center;justify-content:center;padding:2rem;background-image:radial-gradient(ellipse at 20% 50%,rgba(245,197,24,0.08) 0%,transparent 60%);}
 .auth-card{background:white;border-radius:var(--radius-lg);width:440px;max-width:100%;padding:40px 38px 30px;box-shadow:0 24px 80px rgba(0,0,0,0.35);}
 .auth-logo{display:flex;align-items:center;gap:14px;margin-bottom:32px;}
@@ -37,8 +27,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--sky);color:var(--text);mi
 .auth-msg{font-size:13px;padding:10px 14px;border-radius:var(--radius);display:none;}
 .auth-msg.error{background:#FCEBEB;color:#A32D2D;display:block;}
 .auth-msg.success{background:#E1F5EE;color:#0F6E56;display:block;}
-
-/* TOPBAR */
 .topbar{background:var(--navy);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:62px;position:sticky;top:0;z-index:100;box-shadow:0 2px 10px rgba(0,0,0,0.25);}
 .logo-wrap{display:flex;align-items:center;gap:12px;cursor:pointer;}
 .tmu-mark{position:relative;background:var(--navy);border:2.5px solid white;padding:5px 10px;font-size:18px;font-weight:700;color:white;letter-spacing:1px;line-height:1;font-family:'DM Sans',sans-serif;}
@@ -53,8 +41,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--sky);color:var(--text);mi
 .admin-badge{background:var(--gold);color:var(--navy);font-size:10px;font-weight:700;border-radius:20px;padding:2px 8px;letter-spacing:0.5px;}
 .user-chip{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:8px;padding:5px 12px;display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;color:rgba(255,255,255,0.85);transition:background 0.15s;}
 .user-chip:hover{background:rgba(255,255,255,0.15);}
-
-/* HERO */
 .hero{background:var(--navy);color:white;padding:2.5rem 2rem 3rem;}
 .hero-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;}
 .hero h1{font-family:'DM Serif Display',serif;font-size:28px;font-weight:400;margin-bottom:8px;}
@@ -63,14 +49,10 @@ body{font-family:'DM Sans',sans-serif;background:var(--sky);color:var(--text);mi
 .stat-pill{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:var(--radius-lg);padding:12px 20px;text-align:center;min-width:110px;}
 .stat-pill .n{font-size:26px;font-weight:600;color:var(--gold);display:block;font-family:'DM Serif Display',serif;}
 .stat-pill .l{font-size:11px;color:rgba(255,255,255,0.7);margin-top:2px;}
-
-/* LAYOUT */
 .page{max-width:1100px;margin:0 auto;padding:1.5rem 2rem 3rem;}
 .grid{display:grid;grid-template-columns:1fr 300px;gap:1.5rem;}
 .main-col,.sidebar{display:flex;flex-direction:column;gap:1.5rem;}
 .section{display:none;}.section.active{display:block;}
-
-/* CARD */
 .card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow);}
 .card-header{padding:13px 18px 11px;border-bottom:1px solid var(--gray-100);display:flex;align-items:center;justify-content:space-between;background:var(--gray-50);}
 .card-header-left{display:flex;align-items:center;gap:9px;}
@@ -78,21 +60,14 @@ body{font-family:'DM Sans',sans-serif;background:var(--sky);color:var(--text);mi
 .card-title{font-size:14px;font-weight:600;color:var(--navy);}
 .see-all-btn{font-size:12px;color:var(--navy);background:none;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;opacity:0.65;}
 .see-all-btn:hover{opacity:1;}
-
-/* SEARCH BAR */
-.search-wrap{padding:12px 18px;border-bottom:1px solid var(--gray-100);background:var(--gray-50);}
-.search-input{width:100%;border:1px solid var(--gray-200);border-radius:var(--radius);padding:8px 14px 8px 36px;font-size:13px;font-family:'DM Sans',sans-serif;color:var(--text);outline:none;background:white url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%238FA3C0' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E") 10px center no-repeat;transition:border 0.15s;}
+.search-wrap{padding:10px 18px;border-bottom:1px solid var(--gray-100);background:var(--gray-50);}
+.search-input{width:100%;border:1px solid var(--gray-200);border-radius:var(--radius);padding:8px 14px 8px 36px;font-size:13px;font-family:'DM Sans',sans-serif;color:var(--text);outline:none;background:white;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%238FA3C0' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:10px center;transition:border 0.15s;}
 .search-input:focus{border-color:var(--navy);box-shadow:0 0 0 3px rgba(26,58,107,0.1);}
-
-/* TAGS */
 .tag{border-radius:20px;padding:2px 9px;font-size:11px;font-weight:600;}
 .tag-navy{background:#E8F0FB;color:var(--navy);}
 .tag-gold{background:#FEF8E1;color:#7A6000;}
 .tag-teal{background:#E1F5EE;color:#0F6E56;}
 .tag-purple{background:#EEEDFE;color:#3C3489;}
-.tag-pinned{background:#FEF8E1;color:#7A6000;display:inline-flex;align-items:center;gap:3px;}
-
-/* EVENTS */
 .event-item{padding:12px 18px;border-bottom:1px solid var(--gray-100);display:flex;gap:14px;align-items:flex-start;}
 .event-item:last-child{border-bottom:none;}
 .event-date{background:var(--sky);border:1px solid var(--gray-200);color:var(--navy);border-radius:var(--radius);padding:5px 10px;text-align:center;min-width:50px;flex-shrink:0;}
@@ -103,11 +78,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--sky);color:var(--text);mi
 .event-meta{display:flex;gap:10px;flex-wrap:wrap;align-items:center;font-size:12px;color:var(--text-muted);}
 .event-meta i{font-size:13px;vertical-align:-1px;margin-right:2px;}
 .rsvp-btn{border:1px solid var(--navy);color:var(--navy);background:transparent;border-radius:20px;padding:2px 10px;font-size:11px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.15s;}
-.rsvp-btn:hover{background:var(--navy);color:white;}
-.rsvp-btn.rsvpd{background:var(--navy);color:white;}
-.rsvp-count{font-size:11px;color:var(--text-muted);}
-
-/* FORUM */
+.rsvp-btn:hover,.rsvp-btn.rsvpd{background:var(--navy);color:white;}
 .forum-item{padding:13px 18px;border-bottom:1px solid var(--gray-100);cursor:pointer;transition:background 0.1s;}
 .forum-item:last-child{border-bottom:none;}
 .forum-item:hover{background:var(--gray-50);}
@@ -116,18 +87,13 @@ body{font-family:'DM Sans',sans-serif;background:var(--sky);color:var(--text);mi
 .forum-preview{font-size:13px;color:var(--text-muted);margin-bottom:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:680px;}
 .forum-meta{font-size:12px;color:var(--text-muted);display:flex;gap:14px;align-items:center;flex-wrap:wrap;}
 .forum-meta i{font-size:13px;vertical-align:-1px;margin-right:2px;}
-
-/* RICH TEXT EDITOR */
 .rich-editor{border:1px solid var(--gray-200);border-radius:var(--radius);overflow:hidden;background:white;}
 .rich-toolbar{display:flex;gap:2px;padding:6px 8px;border-bottom:1px solid var(--gray-100);background:var(--gray-50);flex-wrap:wrap;}
 .rich-btn{background:none;border:none;width:28px;height:28px;border-radius:6px;cursor:pointer;font-size:14px;color:var(--text-muted);display:flex;align-items:center;justify-content:center;font-family:'DM Sans',sans-serif;font-weight:600;transition:all 0.1s;}
 .rich-btn:hover{background:var(--gray-200);color:var(--navy);}
-.rich-btn.active{background:var(--navy);color:white;}
 .rich-content{min-height:100px;padding:10px 13px;font-size:13px;line-height:1.7;outline:none;font-family:'DM Sans',sans-serif;}
 .rich-content:empty:before{content:attr(data-placeholder);color:var(--gray-400);}
 .rich-content ul,.rich-content ol{padding-left:20px;}
-
-/* RESOURCES */
 .resource-item{padding:11px 18px;border-bottom:1px solid var(--gray-100);display:flex;gap:12px;align-items:center;}
 .resource-item:last-child{border-bottom:none;}
 .resource-icon{width:38px;height:38px;border-radius:var(--radius);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
@@ -139,8 +105,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--sky);color:var(--text);mi
 .resource-name{font-size:13px;font-weight:600;}
 .resource-sub{font-size:12px;color:var(--text-muted);}
 .res-link{font-size:11px;color:var(--navy);word-break:break-all;display:block;margin-top:2px;}
-
-/* CLUBS */
 .clubs-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;}
 .club-item{padding:16px 18px;border-right:1px solid var(--gray-100);border-bottom:1px solid var(--gray-100);cursor:pointer;transition:background 0.1s;}
 .club-item:nth-child(even){border-right:none;}
@@ -151,20 +115,14 @@ body{font-family:'DM Sans',sans-serif;background:var(--sky);color:var(--text);mi
 .club-desc{font-size:12px;color:var(--text-muted);margin-bottom:10px;line-height:1.5;}
 .club-foot{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px;}
 .join-btn{background:transparent;border:1px solid var(--navy);color:var(--navy);border-radius:20px;padding:4px 14px;font-size:12px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.15s;}
-.join-btn:hover{background:var(--navy);color:white;}
-.join-btn.joined{background:var(--navy);color:white;}
-
-/* PROFILE PAGE */
-.profile-hero{background:linear-gradient(135deg,var(--navy),var(--navy-light));border-radius:var(--radius-lg);padding:28px 28px 24px;color:white;margin-bottom:1.5rem;display:flex;align-items:center;gap:20px;}
+.join-btn:hover,.join-btn.joined{background:var(--navy);color:white;}
+.profile-hero{background:linear-gradient(135deg,var(--navy),var(--navy-light));border-radius:var(--radius-lg);padding:28px;color:white;margin-bottom:1.5rem;display:flex;align-items:center;gap:20px;}
 .profile-avatar{width:64px;height:64px;border-radius:50%;background:rgba(255,255,255,0.15);border:2px solid rgba(255,255,255,0.3);display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:700;flex-shrink:0;color:var(--gold);}
 .profile-name{font-family:'DM Serif Display',serif;font-size:22px;margin-bottom:4px;}
 .profile-meta{font-size:13px;color:rgba(255,255,255,0.7);}
 .profile-stats{display:flex;gap:16px;margin-top:14px;}
-.profile-stat{text-align:center;}
 .profile-stat .n{font-size:20px;font-weight:600;color:var(--gold);display:block;font-family:'DM Serif Display',serif;}
 .profile-stat .l{font-size:11px;color:rgba(255,255,255,0.6);}
-
-/* BUTTONS */
 .post-area{padding:12px 18px;border-top:1px solid var(--gray-100);background:var(--gray-50);}
 .btn-primary{background:var(--navy);color:white;border:none;border-radius:var(--radius);padding:9px 18px;font-size:13px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background 0.15s;display:inline-flex;align-items:center;gap:6px;}
 .btn-primary:hover{background:var(--navy-light);}
@@ -173,9 +131,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--sky);color:var(--text);mi
 .btn-secondary:hover{border-color:var(--navy);}
 .btn-danger{background:none;border:none;color:#c0392b;font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif;padding:3px 8px;border-radius:6px;display:inline-flex;align-items:center;gap:4px;transition:background 0.1s;flex-shrink:0;}
 .btn-danger:hover{background:#FCEBEB;}
-.btn-gold{background:var(--gold);color:var(--navy);border:none;border-radius:var(--radius);padding:9px 18px;font-size:13px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;display:inline-flex;align-items:center;gap:6px;}
-
-/* MODAL */
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:200;align-items:center;justify-content:center;}
 .modal-overlay.open{display:flex;}
 .modal{background:white;border-radius:var(--radius-lg);width:540px;max-width:95vw;max-height:90vh;overflow-y:auto;box-shadow:0 24px 70px rgba(0,0,0,0.28);}
@@ -188,33 +143,23 @@ label{font-size:13px;font-weight:600;color:var(--navy);display:block;margin-bott
 input[type=text],input[type=email],input[type=password],input[type=date],select,textarea{width:100%;border:1px solid var(--gray-200);border-radius:var(--radius);padding:9px 13px;font-size:13px;font-family:'DM Sans',sans-serif;color:var(--text);background:white;outline:none;transition:border 0.15s;}
 input:focus,select:focus,textarea:focus{border-color:var(--navy);box-shadow:0 0 0 3px rgba(26,58,107,0.1);}
 textarea{resize:vertical;min-height:90px;line-height:1.6;}
-
-/* PAGE HEADER */
 .page-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;}
 .page-title{font-family:'DM Serif Display',serif;font-size:24px;color:var(--navy);}
-
-/* THREAD VIEW */
 .thread-back{background:none;border:none;color:var(--navy);font-size:13px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;display:flex;align-items:center;gap:5px;margin-bottom:1rem;}
 .thread-back:hover{text-decoration:underline;}
 .thread-card{background:white;border:1px solid var(--gray-200);border-radius:var(--radius-lg);padding:20px 22px;margin-bottom:1rem;box-shadow:var(--shadow);}
 .thread-title{font-family:'DM Serif Display',serif;font-size:20px;color:var(--navy);margin-bottom:8px;}
 .thread-meta{font-size:12px;color:var(--text-muted);margin-bottom:14px;display:flex;gap:14px;flex-wrap:wrap;align-items:center;}
 .thread-body{font-size:14px;line-height:1.7;}
-.thread-body ul,.thread-body ol{padding-left:20px;}
+.thread-body ul,.thread-body ol,.reply-body ul,.reply-body ol{padding-left:20px;}
 .reply-card{background:white;border:1px solid var(--gray-200);border-radius:var(--radius-lg);padding:15px 18px;margin-bottom:10px;box-shadow:var(--shadow);}
 .reply-author-row{font-size:12px;font-weight:600;color:var(--navy);margin-bottom:6px;display:flex;align-items:center;justify-content:space-between;}
 .reply-body{font-size:13px;line-height:1.65;}
-.reply-body ul,.reply-body ol{padding-left:20px;}
 .reply-input-area{background:white;border:1px solid var(--gray-200);border-radius:var(--radius-lg);padding:16px 18px;box-shadow:var(--shadow);}
-
-/* RESOURCE TYPE */
 .type-select{display:flex;gap:10px;flex-wrap:wrap;}
 .type-opt{flex:1;min-width:80px;border:1.5px solid var(--gray-200);border-radius:var(--radius);padding:10px 8px;text-align:center;cursor:pointer;transition:all 0.15s;font-size:12px;font-weight:500;color:var(--text-muted);}
 .type-opt i{font-size:22px;display:block;margin-bottom:4px;}
 .type-opt.selected{border-color:var(--navy);background:var(--sky);color:var(--navy);}
-.type-opt:hover:not(.selected){border-color:var(--gray-400);}
-
-/* ADMIN */
 .admin-hero{background:linear-gradient(135deg,#122952,#1A3A6B);border-radius:var(--radius-lg);padding:22px 24px;margin-bottom:1.5rem;color:white;}
 .admin-hero h2{font-family:'DM Serif Display',serif;font-size:22px;font-weight:400;margin-bottom:4px;display:flex;align-items:center;gap:10px;}
 .admin-hero p{font-size:13px;color:rgba(255,255,255,0.7);}
@@ -227,42 +172,23 @@ textarea{resize:vertical;min-height:90px;line-height:1.6;}
 .admin-row-info{flex:1;min-width:0;}
 .admin-row-info strong{display:block;font-weight:600;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .admin-row-info span{font-size:12px;color:var(--text-muted);}
-
-/* NOTIFICATION BADGE */
-.notif-dot{width:8px;height:8px;background:#e74c3c;border-radius:50%;display:inline-block;margin-left:4px;vertical-align:2px;}
-
-/* EMPTY / LOADING */
 .empty{padding:2.5rem;text-align:center;color:var(--text-muted);font-size:13px;}
 .empty i{font-size:36px;display:block;margin-bottom:8px;opacity:0.3;}
 .loading{padding:2rem;text-align:center;color:var(--text-muted);font-size:13px;}
 .spinner{width:24px;height:24px;border:2.5px solid var(--gray-200);border-top-color:var(--navy);border-radius:50%;animation:spin 0.7s linear infinite;margin:0 auto 10px;}
 @keyframes spin{to{transform:rotate(360deg);}}
-
-/* TOAST */
 .toast{position:fixed;bottom:24px;right:24px;background:var(--navy);color:white;padding:12px 18px;border-radius:var(--radius);font-size:13px;font-weight:500;box-shadow:var(--shadow-md);z-index:999;transform:translateY(80px);opacity:0;transition:all 0.3s;display:flex;align-items:center;gap:8px;}
 .toast.show{transform:translateY(0);opacity:1;}
 .toast.success{background:#0F6E56;}
 .toast.error{background:#A32D2D;}
-
-@media(max-width:768px){
-  .grid{grid-template-columns:1fr;}
-  .clubs-grid{grid-template-columns:1fr;}
-  .topbar{padding:0 1rem;}
-  .nav-btn span{display:none;}
-  .hero-stats{flex-wrap:wrap;}
-  .page{padding:1rem 1rem 3rem;}
-}
+@media(max-width:768px){.grid{grid-template-columns:1fr;}.clubs-grid{grid-template-columns:1fr;}.topbar{padding:0 1rem;}.nav-btn span{display:none;}.hero-stats{flex-wrap:wrap;}.page{padding:1rem 1rem 3rem;}}
 </style>
 </head>
 <body>
 
-<!-- AUTH SCREEN -->
 <div id="auth-screen" class="auth-screen">
   <div class="auth-card">
-    <div class="auth-logo">
-      <div class="tmu-mark">TMU</div>
-      <div class="logo-text"><span class="main">Medicine</span><span class="sub">Student Portal</span></div>
-    </div>
+    <div class="auth-logo"><div class="tmu-mark">TMU</div><div class="logo-text"><span class="main">Medicine</span><span class="sub">Student Portal</span></div></div>
     <div class="auth-tabs">
       <button class="auth-tab active" onclick="switchTab('login')">Sign in</button>
       <button class="auth-tab" onclick="switchTab('signup')">Create account</button>
@@ -276,11 +202,7 @@ textarea{resize:vertical;min-height:90px;line-height:1.6;}
     <div id="signup-form" class="auth-form" style="display:none;">
       <div class="field"><label>Full name</label><input class="auth-input" type="text" id="su-name" placeholder="e.g. Sarah Mitchell"></div>
       <div class="field"><label>Year</label>
-        <select class="auth-input" id="su-year">
-          <option value="">Select your year...</option>
-          <option>1st Year</option><option>2nd Year</option><option>3rd Year</option>
-          <option>4th Year</option><option>Resident</option><option>Faculty</option>
-        </select>
+        <select class="auth-input" id="su-year"><option value="">Select your year...</option><option>1st Year</option><option>2nd Year</option><option>3rd Year</option><option>4th Year</option><option>Resident</option><option>Faculty</option></select>
       </div>
       <div class="field"><label>Email</label><input class="auth-input" type="email" id="su-email" placeholder="your@torontomu.ca"></div>
       <div class="field"><label>Password</label><input class="auth-input" type="password" id="su-pass" placeholder="Min. 6 characters" onkeydown="if(event.key==='Enter')doSignup()"></div>
@@ -289,23 +211,16 @@ textarea{resize:vertical;min-height:90px;line-height:1.6;}
   </div>
 </div>
 
-<!-- MAIN APP -->
 <div id="app" style="display:none;">
 
-<!-- MODALS -->
 <div class="modal-overlay" id="event-modal">
   <div class="modal">
     <div class="modal-header"><span class="modal-title">Add an event</span><button class="modal-close" onclick="closeModal('event-modal')"><i class="ti ti-x"></i></button></div>
     <div class="modal-body">
       <div><label>Event name</label><input type="text" id="ev-name" placeholder="e.g. Study group — Cardiology"></div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-        <div><label>Date</label><input type="date" id="ev-date"></div>
-        <div><label>Time</label><input type="text" id="ev-time" placeholder="e.g. 2:00 PM"></div>
-      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;"><div><label>Date</label><input type="date" id="ev-date"></div><div><label>Time</label><input type="text" id="ev-time" placeholder="e.g. 2:00 PM"></div></div>
       <div><label>Location</label><input type="text" id="ev-loc" placeholder="e.g. Room 204 / Zoom"></div>
-      <div><label>Category</label>
-        <select id="ev-cat"><option>Workshop</option><option>Exam prep</option><option>Wellness</option><option>Research</option><option>Social</option><option>Club</option><option>Other</option></select>
-      </div>
+      <div><label>Category</label><select id="ev-cat"><option>Workshop</option><option>Exam prep</option><option>Wellness</option><option>Research</option><option>Social</option><option>Club</option><option>Other</option></select></div>
     </div>
     <div class="modal-footer"><button class="btn-secondary" onclick="closeModal('event-modal')">Cancel</button><button class="btn-primary" onclick="submitEvent()"><i class="ti ti-check"></i> Post event</button></div>
   </div>
@@ -316,22 +231,19 @@ textarea{resize:vertical;min-height:90px;line-height:1.6;}
     <div class="modal-header"><span class="modal-title">Ask a question</span><button class="modal-close" onclick="closeModal('forum-modal')"><i class="ti ti-x"></i></button></div>
     <div class="modal-body">
       <div><label>Question title</label><input type="text" id="fo-title" placeholder="What do you want to know?"></div>
-      <div>
-        <label>Details (optional)</label>
+      <div><label>Details (optional)</label>
         <div class="rich-editor">
           <div class="rich-toolbar">
-            <button class="rich-btn" onclick="fmt('bold')" title="Bold"><b>B</b></button>
-            <button class="rich-btn" onclick="fmt('italic')" title="Italic"><i>I</i></button>
-            <button class="rich-btn" onclick="fmt('underline')" title="Underline"><u>U</u></button>
-            <button class="rich-btn" onclick="fmt('insertUnorderedList')" title="Bullet list"><i class="ti ti-list"></i></button>
-            <button class="rich-btn" onclick="fmt('insertOrderedList')" title="Numbered list"><i class="ti ti-list-numbers"></i></button>
+            <button class="rich-btn" onclick="fmt('bold')"><b>B</b></button>
+            <button class="rich-btn" onclick="fmt('italic')"><i>I</i></button>
+            <button class="rich-btn" onclick="fmt('underline')"><u>U</u></button>
+            <button class="rich-btn" onclick="fmt('insertUnorderedList')"><i class="ti ti-list"></i></button>
+            <button class="rich-btn" onclick="fmt('insertOrderedList')"><i class="ti ti-list-numbers"></i></button>
           </div>
-          <div class="rich-content" id="fo-body" contenteditable="true" data-placeholder="Add more context, steps, or details..."></div>
+          <div class="rich-content" id="fo-body" contenteditable="true" data-placeholder="Add more context..."></div>
         </div>
       </div>
-      <div><label>Category</label>
-        <select id="fo-cat"><option>Studying</option><option>Exams</option><option>Clerkship</option><option>Admin</option><option>Wellness</option><option>Research</option><option>General</option></select>
-      </div>
+      <div><label>Category</label><select id="fo-cat"><option>Studying</option><option>Exams</option><option>Clerkship</option><option>Admin</option><option>Wellness</option><option>Research</option><option>General</option></select></div>
     </div>
     <div class="modal-footer"><button class="btn-secondary" onclick="closeModal('forum-modal')">Cancel</button><button class="btn-primary" onclick="submitForum()"><i class="ti ti-send"></i> Post question</button></div>
   </div>
@@ -363,7 +275,7 @@ textarea{resize:vertical;min-height:90px;line-height:1.6;}
     <div class="modal-header"><span class="modal-title">Add a club</span><button class="modal-close" onclick="closeModal('club-modal')"><i class="ti ti-x"></i></button></div>
     <div class="modal-body">
       <div><label>Club name</label><input type="text" id="cl-name" placeholder="e.g. Emergency Medicine Society"></div>
-      <div><label>Description</label><textarea id="cl-desc" placeholder="What is this club about? Who should join?"></textarea></div>
+      <div><label>Description</label><textarea id="cl-desc" placeholder="What is this club about?"></textarea></div>
       <div><label>How to join / contact</label><input type="text" id="cl-join" placeholder="e.g. Email medclub@torontomu.ca"></div>
       <div><label>Link (optional)</label><input type="text" id="cl-link" placeholder="https://..."></div>
     </div>
@@ -381,12 +293,8 @@ textarea{resize:vertical;min-height:90px;line-height:1.6;}
 
 <div class="toast" id="toast"></div>
 
-<!-- TOPBAR -->
 <div class="topbar">
-  <div class="logo-wrap" onclick="showSection('home')">
-    <div class="tmu-mark">TMU</div>
-    <div class="logo-text"><span class="main">Medicine</span><span class="sub">Student Portal</span></div>
-  </div>
+  <div class="logo-wrap" onclick="showSection('home')"><div class="tmu-mark">TMU</div><div class="logo-text"><span class="main">Medicine</span><span class="sub">Student Portal</span></div></div>
   <nav class="nav">
     <button class="nav-btn active" onclick="showSection('home')" id="nav-home"><i class="ti ti-home"></i><span>Home</span></button>
     <button class="nav-btn" onclick="showSection('events')" id="nav-events"><i class="ti ti-calendar"></i><span>Events</span></button>
@@ -398,57 +306,42 @@ textarea{resize:vertical;min-height:90px;line-height:1.6;}
   </nav>
   <div class="topbar-right">
     <span class="admin-badge" id="admin-badge" style="display:none;">ADMIN</span>
-    <div class="user-chip" onclick="doLogout()">
-      <i class="ti ti-user-circle"></i>
-      <span id="user-display">...</span>
-      <i class="ti ti-logout" style="font-size:14px;opacity:0.55;"></i>
-    </div>
+    <div class="user-chip" onclick="doLogout()"><i class="ti ti-user-circle"></i><span id="user-display">...</span><i class="ti ti-logout" style="font-size:14px;opacity:0.55;"></i></div>
   </div>
 </div>
 
-<!-- HERO -->
 <div class="hero">
   <div class="hero-inner">
-    <div>
-      <h1>Welcome, <span id="hero-name">med student</span> 👋</h1>
-      <p>Your hub for events, study resources, clubs, and peer support — everything you need at TMU Medicine.</p>
-    </div>
+    <div><h1>Welcome, <span id="hero-name">med student</span> &#128075;</h1><p>Your hub for events, study resources, clubs, and peer support at TMU Medicine.</p></div>
     <div class="hero-stats">
-      <div class="stat-pill"><span class="n" id="stat-events">–</span><span class="l">Events this month</span></div>
-      <div class="stat-pill"><span class="n" id="stat-threads">–</span><span class="l">Discussions</span></div>
-      <div class="stat-pill"><span class="n" id="stat-resources">–</span><span class="l">Resources shared</span></div>
+      <div class="stat-pill"><span class="n" id="stat-events">&#8211;</span><span class="l">Events this month</span></div>
+      <div class="stat-pill"><span class="n" id="stat-threads">&#8211;</span><span class="l">Discussions</span></div>
+      <div class="stat-pill"><span class="n" id="stat-resources">&#8211;</span><span class="l">Resources shared</span></div>
     </div>
   </div>
 </div>
 
-<!-- HOME -->
 <div class="section active" id="section-home">
   <div class="page">
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem;">
       <div style="background:linear-gradient(135deg,#1A3A6B,#2a4f8a);border-radius:14px;padding:24px 26px;color:white;display:flex;flex-direction:column;justify-content:space-between;min-height:130px;">
         <i class="ti ti-quote" style="font-size:28px;color:rgba(245,197,24,0.5);"></i>
-        <div>
-          <div style="font-family:'DM Serif Display',serif;font-size:15px;line-height:1.6;margin-bottom:8px;">"The art of medicine consists of amusing the patient while nature cures the disease."</div>
-          <div style="font-size:11px;color:rgba(255,255,255,0.5);">— Voltaire</div>
-        </div>
+        <div><div style="font-family:'DM Serif Display',serif;font-size:15px;line-height:1.6;margin-bottom:8px;">"The art of medicine consists of amusing the patient while nature cures the disease."</div><div style="font-size:11px;color:rgba(255,255,255,0.5);">&#8212; Voltaire</div></div>
       </div>
       <div style="background:linear-gradient(135deg,#0F6E56,#1a9e7a);border-radius:14px;padding:24px 26px;color:white;display:flex;flex-direction:column;justify-content:space-between;min-height:130px;">
         <i class="ti ti-quote" style="font-size:28px;color:rgba(255,255,255,0.25);"></i>
-        <div>
-          <div style="font-family:'DM Serif Display',serif;font-size:15px;line-height:1.6;margin-bottom:8px;">"Wherever the art of medicine is loved, there is also a love of humanity."</div>
-          <div style="font-size:11px;color:rgba(255,255,255,0.5);">— Hippocrates</div>
-        </div>
+        <div><div style="font-family:'DM Serif Display',serif;font-size:15px;line-height:1.6;margin-bottom:8px;">"Wherever the art of medicine is loved, there is also a love of humanity."</div><div style="font-size:11px;color:rgba(255,255,255,0.5);">&#8212; Hippocrates</div></div>
       </div>
     </div>
     <div class="grid">
       <div class="main-col">
         <div class="card">
-          <div class="card-header"><div class="card-header-left"><i class="ti ti-calendar-event"></i><span class="card-title">Upcoming events</span></div><button class="see-all-btn" onclick="showSection('events')">See all →</button></div>
+          <div class="card-header"><div class="card-header-left"><i class="ti ti-calendar-event"></i><span class="card-title">Upcoming events</span></div><button class="see-all-btn" onclick="showSection('events')">See all &#8594;</button></div>
           <div id="home-events-list"><div class="loading"><div class="spinner"></div>Loading...</div></div>
           <div class="post-area"><button class="btn-primary" onclick="openModal('event-modal')"><i class="ti ti-plus"></i> Add an event</button></div>
         </div>
         <div class="card">
-          <div class="card-header"><div class="card-header-left"><i class="ti ti-messages"></i><span class="card-title">Recent discussions</span></div><button class="see-all-btn" onclick="showSection('forum')">See all →</button></div>
+          <div class="card-header"><div class="card-header-left"><i class="ti ti-messages"></i><span class="card-title">Recent discussions</span></div><button class="see-all-btn" onclick="showSection('forum')">See all &#8594;</button></div>
           <div id="home-forum-list"><div class="loading"><div class="spinner"></div>Loading...</div></div>
           <div class="post-area"><button class="btn-primary" onclick="openModal('forum-modal')"><i class="ti ti-plus"></i> Ask a question</button></div>
         </div>
@@ -460,18 +353,9 @@ textarea{resize:vertical;min-height:90px;line-height:1.6;}
             <div style="font-family:'DM Serif Display',serif;font-size:15px;line-height:1.6;">"Built on innovation, equity, and community-centred care."</div>
           </div>
           <div style="padding:16px 18px;display:flex;flex-direction:column;gap:13px;">
-            <div style="display:flex;align-items:flex-start;gap:10px;">
-              <div style="width:32px;height:32px;background:var(--sky);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="ti ti-messages" style="color:var(--navy);font-size:16px;"></i></div>
-              <div><div style="font-size:13px;font-weight:600;">Ask questions</div><div style="font-size:12px;color:var(--text-muted);">Use the forum to connect and get answers from peers</div></div>
-            </div>
-            <div style="display:flex;align-items:flex-start;gap:10px;">
-              <div style="width:32px;height:32px;background:var(--sky);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="ti ti-books" style="color:var(--navy);font-size:16px;"></i></div>
-              <div><div style="font-size:13px;font-weight:600;">Share resources</div><div style="font-size:12px;color:var(--text-muted);">Upload notes, videos and links to help classmates</div></div>
-            </div>
-            <div style="display:flex;align-items:flex-start;gap:10px;">
-              <div style="width:32px;height:32px;background:var(--sky);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="ti ti-users-group" style="color:var(--navy);font-size:16px;"></i></div>
-              <div><div style="font-size:13px;font-weight:600;">Join clubs</div><div style="font-size:12px;color:var(--text-muted);">Find your community within TMU Medicine</div></div>
-            </div>
+            <div style="display:flex;align-items:flex-start;gap:10px;"><div style="width:32px;height:32px;background:var(--sky);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="ti ti-messages" style="color:var(--navy);font-size:16px;"></i></div><div><div style="font-size:13px;font-weight:600;">Ask questions</div><div style="font-size:12px;color:var(--text-muted);">Connect with peers in the forum</div></div></div>
+            <div style="display:flex;align-items:flex-start;gap:10px;"><div style="width:32px;height:32px;background:var(--sky);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="ti ti-books" style="color:var(--navy);font-size:16px;"></i></div><div><div style="font-size:13px;font-weight:600;">Share resources</div><div style="font-size:12px;color:var(--text-muted);">Upload notes, videos and links</div></div></div>
+            <div style="display:flex;align-items:flex-start;gap:10px;"><div style="width:32px;height:32px;background:var(--sky);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="ti ti-users-group" style="color:var(--navy);font-size:16px;"></i></div><div><div style="font-size:13px;font-weight:600;">Join clubs</div><div style="font-size:12px;color:var(--text-muted);">Find your community at TMU Medicine</div></div></div>
           </div>
         </div>
       </div>
@@ -479,26 +363,18 @@ textarea{resize:vertical;min-height:90px;line-height:1.6;}
   </div>
 </div>
 
-<!-- EVENTS -->
 <div class="section" id="section-events">
   <div class="page">
     <div class="page-header"><h2 class="page-title">Events</h2><button class="btn-primary" onclick="openModal('event-modal')"><i class="ti ti-plus"></i> Add an event</button></div>
-    <div class="card">
-      <div class="search-wrap"><input class="search-input" type="text" placeholder="Search events..." oninput="filterEvents(this.value)"></div>
-      <div id="all-events-list"><div class="loading"><div class="spinner"></div>Loading...</div></div>
-    </div>
+    <div class="card"><div class="search-wrap"><input class="search-input" type="text" placeholder="Search events..." oninput="filterEvents(this.value)"></div><div id="all-events-list"><div class="loading"><div class="spinner"></div>Loading...</div></div></div>
   </div>
 </div>
 
-<!-- FORUM -->
 <div class="section" id="section-forum">
   <div id="forum-list-view">
     <div class="page">
-      <div class="page-header"><h2 class="page-title">Q&A Forum</h2><button class="btn-primary" onclick="openModal('forum-modal')"><i class="ti ti-plus"></i> Ask a question</button></div>
-      <div class="card">
-        <div class="search-wrap"><input class="search-input" type="text" placeholder="Search discussions..." oninput="filterForum(this.value)"></div>
-        <div id="all-forum-list"><div class="loading"><div class="spinner"></div>Loading...</div></div>
-      </div>
+      <div class="page-header"><h2 class="page-title">Q&amp;A Forum</h2><button class="btn-primary" onclick="openModal('forum-modal')"><i class="ti ti-plus"></i> Ask a question</button></div>
+      <div class="card"><div class="search-wrap"><input class="search-input" type="text" placeholder="Search discussions..." oninput="filterForum(this.value)"></div><div id="all-forum-list"><div class="loading"><div class="spinner"></div>Loading...</div></div></div>
     </div>
   </div>
   <div id="forum-thread-view" style="display:none;">
@@ -509,11 +385,11 @@ textarea{resize:vertical;min-height:90px;line-height:1.6;}
         <div style="margin-bottom:10px;font-size:14px;font-weight:600;color:var(--navy);">Add a reply</div>
         <div class="rich-editor">
           <div class="rich-toolbar">
-            <button class="rich-btn" onclick="fmt2('bold')" title="Bold"><b>B</b></button>
-            <button class="rich-btn" onclick="fmt2('italic')" title="Italic"><i>I</i></button>
-            <button class="rich-btn" onclick="fmt2('underline')" title="Underline"><u>U</u></button>
-            <button class="rich-btn" onclick="fmt2('insertUnorderedList')" title="Bullets"><i class="ti ti-list"></i></button>
-            <button class="rich-btn" onclick="fmt2('insertOrderedList')" title="Numbered"><i class="ti ti-list-numbers"></i></button>
+            <button class="rich-btn" onclick="fmt2('bold')"><b>B</b></button>
+            <button class="rich-btn" onclick="fmt2('italic')"><i>I</i></button>
+            <button class="rich-btn" onclick="fmt2('underline')"><u>U</u></button>
+            <button class="rich-btn" onclick="fmt2('insertUnorderedList')"><i class="ti ti-list"></i></button>
+            <button class="rich-btn" onclick="fmt2('insertOrderedList')"><i class="ti ti-list-numbers"></i></button>
           </div>
           <div class="rich-content" id="reply-input" contenteditable="true" data-placeholder="Share your answer or thoughts..."></div>
         </div>
@@ -523,31 +399,17 @@ textarea{resize:vertical;min-height:90px;line-height:1.6;}
   </div>
 </div>
 
-<!-- RESOURCES -->
 <div class="section" id="section-resources">
   <div class="page">
     <div class="page-header"><h2 class="page-title">Resources</h2><button class="btn-primary" onclick="openModal('resource-modal')"><i class="ti ti-upload"></i> Share a resource</button></div>
     <div style="display:flex;flex-direction:column;gap:1.25rem;">
-      <div class="card">
-        <div class="card-header"><div class="card-header-left"><i class="ti ti-player-play"></i><span class="card-title">Videos</span></div></div>
-        <div class="search-wrap"><input class="search-input" type="text" placeholder="Search videos..." oninput="filterResources('videos',this.value)"></div>
-        <div id="res-videos-list"><div class="loading"><div class="spinner"></div>Loading...</div></div>
-      </div>
-      <div class="card">
-        <div class="card-header"><div class="card-header-left"><i class="ti ti-book"></i><span class="card-title">Textbooks</span></div></div>
-        <div class="search-wrap"><input class="search-input" type="text" placeholder="Search textbooks..." oninput="filterResources('textbooks',this.value)"></div>
-        <div id="res-textbooks-list"><div class="loading"><div class="spinner"></div>Loading...</div></div>
-      </div>
-      <div class="card">
-        <div class="card-header"><div class="card-header-left"><i class="ti ti-files"></i><span class="card-title">Other resources</span></div></div>
-        <div class="search-wrap"><input class="search-input" type="text" placeholder="Search resources..." oninput="filterResources('other',this.value)"></div>
-        <div id="res-other-list"><div class="loading"><div class="spinner"></div>Loading...</div></div>
-      </div>
+      <div class="card"><div class="card-header"><div class="card-header-left"><i class="ti ti-player-play"></i><span class="card-title">Videos</span></div></div><div class="search-wrap"><input class="search-input" type="text" placeholder="Search videos..." oninput="filterResources('videos',this.value)"></div><div id="res-videos-list"><div class="loading"><div class="spinner"></div>Loading...</div></div></div>
+      <div class="card"><div class="card-header"><div class="card-header-left"><i class="ti ti-book"></i><span class="card-title">Textbooks</span></div></div><div class="search-wrap"><input class="search-input" type="text" placeholder="Search textbooks..." oninput="filterResources('textbooks',this.value)"></div><div id="res-textbooks-list"><div class="loading"><div class="spinner"></div>Loading...</div></div></div>
+      <div class="card"><div class="card-header"><div class="card-header-left"><i class="ti ti-files"></i><span class="card-title">Other resources</span></div></div><div class="search-wrap"><input class="search-input" type="text" placeholder="Search resources..." oninput="filterResources('other',this.value)"></div><div id="res-other-list"><div class="loading"><div class="spinner"></div>Loading...</div></div></div>
     </div>
   </div>
 </div>
 
-<!-- CLUBS -->
 <div class="section" id="section-clubs">
   <div class="page">
     <div class="page-header"><h2 class="page-title">Student Clubs</h2><button class="btn-primary" onclick="openModal('club-modal')"><i class="ti ti-plus"></i> Add a club</button></div>
@@ -555,7 +417,6 @@ textarea{resize:vertical;min-height:90px;line-height:1.6;}
   </div>
 </div>
 
-<!-- PROFILE -->
 <div class="section" id="section-profile">
   <div class="page">
     <div class="profile-hero" id="profile-hero"></div>
@@ -567,502 +428,668 @@ textarea{resize:vertical;min-height:90px;line-height:1.6;}
   </div>
 </div>
 
-<!-- ADMIN -->
 <div class="section" id="section-admin">
   <div class="page">
     <div class="admin-hero">
       <h2><i class="ti ti-shield-check"></i> Admin Panel</h2>
       <p>Full control over all portal content. Only you can see this.</p>
       <div class="admin-stats-grid">
-        <div class="admin-stat-box"><div class="n" id="adm-n-users">–</div><div class="l">Users</div></div>
-        <div class="admin-stat-box"><div class="n" id="adm-n-events">–</div><div class="l">Events</div></div>
-        <div class="admin-stat-box"><div class="n" id="adm-n-threads">–</div><div class="l">Threads</div></div>
-        <div class="admin-stat-box"><div class="n" id="adm-n-resources">–</div><div class="l">Resources</div></div>
-        <div class="admin-stat-box"><div class="n" id="adm-n-clubs">–</div><div class="l">Clubs</div></div>
+        <div class="admin-stat-box"><div class="n" id="adm-n-users">&#8211;</div><div class="l">Users</div></div>
+        <div class="admin-stat-box"><div class="n" id="adm-n-events">&#8211;</div><div class="l">Events</div></div>
+        <div class="admin-stat-box"><div class="n" id="adm-n-threads">&#8211;</div><div class="l">Threads</div></div>
+        <div class="admin-stat-box"><div class="n" id="adm-n-resources">&#8211;</div><div class="l">Resources</div></div>
+        <div class="admin-stat-box"><div class="n" id="adm-n-clubs">&#8211;</div><div class="l">Clubs</div></div>
       </div>
     </div>
     <div style="display:flex;flex-direction:column;gap:1.25rem;">
       <div class="card"><div class="card-header"><div class="card-header-left"><i class="ti ti-users"></i><span class="card-title">All users</span></div></div><div id="adm-users"><div class="loading"><div class="spinner"></div>Loading...</div></div></div>
       <div class="card"><div class="card-header"><div class="card-header-left"><i class="ti ti-calendar"></i><span class="card-title">All events</span></div></div><div id="adm-events"></div></div>
-      <div class="card"><div class="card-header"><div class="card-header-left"><i class="ti ti-messages"></i><span class="card-title">All forum threads</span></div></div><div id="adm-threads"></div></div>
+      <div class="card"><div class="card-header"><div class="card-header-left"><i class="ti ti-messages"></i><span class="card-title">All threads</span></div></div><div id="adm-threads"></div></div>
       <div class="card"><div class="card-header"><div class="card-header-left"><i class="ti ti-books"></i><span class="card-title">All resources</span></div></div><div id="adm-resources"></div></div>
       <div class="card"><div class="card-header"><div class="card-header-left"><i class="ti ti-users-group"></i><span class="card-title">All clubs</span></div></div><div id="adm-clubs"></div></div>
     </div>
   </div>
 </div>
 
-</div><!-- /#app -->
+</div>
 
 <script>
-const SUPABASE_URL      = 'https://udmjwzfdsiqcavitdvab.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVkbWp3emZkc2lxY2F2aXRkdmFiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODEwMTUxNTMsImV4cCI6MjA5NjU5MTE1M30.Dd6auFPqmunleFc8PharqH74qeV4mQHBXGVz7Sp5wKw';
-const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+var SUPABASE_URL      = 'https://udmjwzfdsiqcavitdvab.supabase.co';
+var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVkbWp3emZkc2lxY2F2aXRkdmFiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODEwMTUxNTMsImV4cCI6MjA5NjU5MTE1M30.Dd6auFPqmunleFc8PharqH74qeV4mQHBXGVz7Sp5wKw';
+var sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-let currentUser = null, currentProfile = null, isAdmin = false;
-let currentThread = null, selResType = 'pdf', appLoading = false;
-let allEvents = [], allThreads = [], allResources = {};
+var currentUser = null, currentProfile = null, isAdmin = false;
+var currentThread = null, selResType = 'pdf', appLoading = false;
+var allEvents = [], allThreads = [], allResources = {};
 
-// Sign out any existing session on load
-sb.auth.signOut();
+(async function() { try { await sb.auth.signOut(); } catch(e) {} appLoading = false; })();
 
-// TOAST
-function toast(msg, type='success') {
-  const t = document.getElementById('toast');
-  t.innerHTML = `<i class="ti ti-${type==='success'?'check':'alert-circle'}"></i> ${msg}`;
+function toast(msg, type) {
+  type = type || 'success';
+  var t = document.getElementById('toast');
+  t.innerHTML = '<i class="ti ti-' + (type === 'success' ? 'check' : 'alert-circle') + '"></i> ' + msg;
   t.className = 'toast ' + type;
   t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 3000);
+  setTimeout(function() { t.classList.remove('show'); }, 3000);
 }
 
-// AUTH
 function switchTab(tab) {
-  document.querySelectorAll('.auth-tab').forEach((el,i) => el.classList.toggle('active',(i===0)===(tab==='login')));
-  document.getElementById('login-form').style.display  = tab==='login'  ? 'flex':'none';
-  document.getElementById('signup-form').style.display = tab==='signup' ? 'flex':'none';
+  var tabs = document.querySelectorAll('.auth-tab');
+  tabs[0].classList.toggle('active', tab === 'login');
+  tabs[1].classList.toggle('active', tab === 'signup');
+  document.getElementById('login-form').style.display  = tab === 'login'  ? 'flex' : 'none';
+  document.getElementById('signup-form').style.display = tab === 'signup' ? 'flex' : 'none';
   setAuthMsg('');
 }
-function setAuthMsg(msg, type='error') {
-  const el = document.getElementById('auth-msg');
+function setAuthMsg(msg, type) {
+  var el = document.getElementById('auth-msg');
   el.textContent = msg;
-  el.className = 'auth-msg' + (msg?' '+type:'');
+  el.className = 'auth-msg' + (msg ? ' ' + (type || 'error') : '');
 }
+
 async function doLogin() {
-  const email = document.getElementById('li-email').value.trim();
-  const pass  = document.getElementById('li-pass').value;
-  if (!email||!pass) { setAuthMsg('Please fill in both fields.'); return; }
-  const btn = document.getElementById('li-btn');
-  btn.disabled=true; btn.innerHTML='<i class="ti ti-loader"></i> Signing in...';
-  const { data, error } = await sb.auth.signInWithPassword({ email, password: pass });
-  if (error) { setAuthMsg(error.message); btn.disabled=false; btn.innerHTML='<i class="ti ti-login"></i> Sign in'; return; }
-  if (data?.user) await loadProfile(data.user);
+  var email = document.getElementById('li-email').value.trim();
+  var pass  = document.getElementById('li-pass').value;
+  if (!email || !pass) { setAuthMsg('Please fill in both fields.'); return; }
+  var btn = document.getElementById('li-btn');
+  btn.disabled = true; btn.innerHTML = '<i class="ti ti-loader"></i> Signing in...';
+  var result = await sb.auth.signInWithPassword({ email: email, password: pass });
+  if (result.error) {
+    setAuthMsg(result.error.message);
+    btn.disabled = false; btn.innerHTML = '<i class="ti ti-login"></i> Sign in';
+    return;
+  }
+  if (result.data && result.data.user) await loadProfile(result.data.user);
 }
+
 async function doSignup() {
-  const name=document.getElementById('su-name').value.trim(), year=document.getElementById('su-year').value;
-  const email=document.getElementById('su-email').value.trim(), pass=document.getElementById('su-pass').value;
-  if (!name||!email||!pass) { setAuthMsg('Please fill in all required fields.'); return; }
-  if (pass.length<6) { setAuthMsg('Password must be at least 6 characters.'); return; }
-  const btn=document.getElementById('su-btn');
-  btn.disabled=true; btn.innerHTML='<i class="ti ti-loader"></i> Creating account...';
-  const { data, error } = await sb.auth.signUp({ email, password:pass, options:{ data:{ name, year } } });
-  if (error) { setAuthMsg(error.message); btn.disabled=false; btn.innerHTML='<i class="ti ti-user-plus"></i> Create account'; return; }
-  if (data.user) {
-    await sb.from('profiles').upsert({ id:data.user.id, name, year:year||null },{ onConflict:'id' });
-    if (data.session) await loadProfile(data.user);
-    else { setAuthMsg('Check your email to confirm your account, then sign in.','success'); btn.disabled=false; btn.innerHTML='<i class="ti ti-user-plus"></i> Create account'; }
+  var name  = document.getElementById('su-name').value.trim();
+  var year  = document.getElementById('su-year').value;
+  var email = document.getElementById('su-email').value.trim();
+  var pass  = document.getElementById('su-pass').value;
+  if (!name || !email || !pass) { setAuthMsg('Please fill in all required fields.'); return; }
+  if (pass.length < 6) { setAuthMsg('Password must be at least 6 characters.'); return; }
+  var btn = document.getElementById('su-btn');
+  btn.disabled = true; btn.innerHTML = '<i class="ti ti-loader"></i> Creating account...';
+  var result = await sb.auth.signUp({ email: email, password: pass, options: { data: { name: name, year: year } } });
+  if (result.error) { setAuthMsg(result.error.message); btn.disabled = false; btn.innerHTML = '<i class="ti ti-user-plus"></i> Create account'; return; }
+  if (result.data && result.data.user) {
+    await sb.from('profiles').upsert({ id: result.data.user.id, name: name, year: year || null }, { onConflict: 'id' });
+    if (result.data.session) {
+      await loadProfile(result.data.user);
+    } else {
+      setAuthMsg('Check your email to confirm your account, then sign in.', 'success');
+      btn.disabled = false; btn.innerHTML = '<i class="ti ti-user-plus"></i> Create account';
+    }
   }
 }
+
 async function doLogout() {
   await sb.auth.signOut();
-  currentUser=null; currentProfile=null; isAdmin=false; appLoading=false;
-  document.getElementById('admin-badge').style.display='none';
-  document.getElementById('nav-admin').style.display='none';
-  document.getElementById('app').style.display='none';
-  document.getElementById('auth-screen').style.display='flex';
-  document.getElementById('li-email').value='';
-  document.getElementById('li-pass').value='';
+  currentUser = null; currentProfile = null; isAdmin = false; appLoading = false;
+  document.getElementById('admin-badge').style.display = 'none';
+  document.getElementById('nav-admin').style.display = 'none';
+  document.getElementById('app').style.display = 'none';
+  document.getElementById('auth-screen').style.display = 'flex';
+  document.getElementById('li-email').value = '';
+  document.getElementById('li-pass').value = '';
 }
+
 async function loadProfile(user) {
   if (appLoading) return;
   appLoading = true;
   try {
     currentUser = user;
-    const { data:profile } = await sb.from('profiles').select('*').eq('id',user.id).single();
-    currentProfile = profile;
-    isAdmin = profile?.is_admin===true;
-    const name = profile?.name||user.email;
+    var res = await sb.from('profiles').select('*').eq('id', user.id).single();
+    currentProfile = res.data;
+    isAdmin = currentProfile && currentProfile.is_admin === true;
+    var name = (currentProfile && currentProfile.name) || user.email;
     document.getElementById('user-display').textContent = name;
     document.getElementById('hero-name').textContent = name;
-    if (isAdmin) { document.getElementById('admin-badge').style.display='inline'; document.getElementById('nav-admin').style.display='inline-flex'; }
-    document.getElementById('auth-screen').style.display='none';
-    document.getElementById('app').style.display='block';
+    if (isAdmin) {
+      document.getElementById('admin-badge').style.display = 'inline';
+      document.getElementById('nav-admin').style.display = 'inline-flex';
+    }
+    document.getElementById('auth-screen').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
     await loadAll();
     appLoading = false;
-  } catch(e) { console.error(e); appLoading=false; document.getElementById('auth-screen').style.display='none'; document.getElementById('app').style.display='block'; }
+  } catch(e) {
+    console.error(e); appLoading = false;
+    document.getElementById('auth-screen').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+  }
 }
 
-// NAV
 function showSection(id) {
-  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
-  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
-  document.getElementById('section-'+id).classList.add('active');
-  document.getElementById('nav-'+id).classList.add('active');
-  window.scrollTo(0,0);
-  if (id==='admin'&&isAdmin) loadAdminPanel();
-  if (id==='profile') loadProfilePage();
+  document.querySelectorAll('.section').forEach(function(s) { s.classList.remove('active'); });
+  document.querySelectorAll('.nav-btn').forEach(function(b) { b.classList.remove('active'); });
+  document.getElementById('section-' + id).classList.add('active');
+  document.getElementById('nav-' + id).classList.add('active');
+  window.scrollTo(0, 0);
+  if (id === 'admin' && isAdmin) loadAdminPanel();
+  if (id === 'profile') loadProfilePage();
 }
 function openModal(id)  { document.getElementById(id).classList.add('open'); }
 function closeModal(id) { document.getElementById(id).classList.remove('open'); }
-document.querySelectorAll('.modal-overlay').forEach(m => m.addEventListener('click',e=>{ if(e.target===m) closeModal(m.id); }));
+document.querySelectorAll('.modal-overlay').forEach(function(m) {
+  m.addEventListener('click', function(e) { if (e.target === m) closeModal(m.id); });
+});
 
-// HELPERS
-const CAT_TAG = { Workshop:'tag-teal','Exam prep':'tag-gold',Wellness:'tag-purple',Research:'tag-navy',Social:'tag-teal',Club:'tag-navy',Other:'tag-navy',Studying:'tag-gold',Exams:'tag-teal',Clerkship:'tag-purple',Admin:'tag-navy',General:'tag-navy' };
-const tag = cat => `<span class="tag ${CAT_TAG[cat]||'tag-navy'}">${cat}</span>`;
-function fmtDate(d) { const dt=new Date(d+'T00:00:00'); return { day:dt.getDate(), mon:['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'][dt.getMonth()] }; }
-function timeAgo(ts) { const s=Math.floor((Date.now()-new Date(ts))/1000); if(s<60) return 'Just now'; const m=Math.floor(s/60),h=Math.floor(m/60),d=Math.floor(h/24); if(d>0) return d+'d ago'; if(h>0) return h+'h ago'; return m+'m ago'; }
-const canDel = id => isAdmin||currentUser?.id===id;
-function esc(s){ if(!s) return ''; const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
-
-// RICH TEXT
-function fmt(cmd)  { document.getElementById('fo-body').focus(); document.execCommand(cmd,false,null); }
-function fmt2(cmd) { document.getElementById('reply-input').focus(); document.execCommand(cmd,false,null); }
+var CAT_TAG = { Workshop:'tag-teal','Exam prep':'tag-gold',Wellness:'tag-purple',Research:'tag-navy',Social:'tag-teal',Club:'tag-navy',Other:'tag-navy',Studying:'tag-gold',Exams:'tag-teal',Clerkship:'tag-purple',Admin:'tag-navy',General:'tag-navy' };
+function mkTag(cat) { return '<span class="tag ' + (CAT_TAG[cat] || 'tag-navy') + '">' + esc(cat) + '</span>'; }
+function fmtDate(d) {
+  var dt = new Date(d + 'T00:00:00');
+  var mons = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+  return { day: dt.getDate(), mon: mons[dt.getMonth()] };
+}
+function timeAgo(ts) {
+  var s = Math.floor((Date.now() - new Date(ts)) / 1000);
+  if (s < 60) return 'Just now';
+  var m = Math.floor(s/60), h = Math.floor(m/60), d = Math.floor(h/24);
+  if (d > 0) return d + 'd ago';
+  if (h > 0) return h + 'h ago';
+  return m + 'm ago';
+}
+function canDel(authorId) { return isAdmin || (currentUser && currentUser.id === authorId); }
+function esc(s) {
+  if (!s) return '';
+  var d = document.createElement('div');
+  d.textContent = String(s);
+  return d.innerHTML;
+}
+function stripHtml(s) {
+  if (!s) return '';
+  var d = document.createElement('div');
+  d.innerHTML = s;
+  return d.textContent || d.innerText || '';
+}
+function fmt(cmd)  { document.getElementById('fo-body').focus(); document.execCommand(cmd, false, null); }
+function fmt2(cmd) { document.getElementById('reply-input').focus(); document.execCommand(cmd, false, null); }
 
 // EVENTS
 async function loadEvents() {
-  const { data } = await sb.from('events').select('*').order('date',{ascending:true});
-  allEvents = data||[];
+  var res = await sb.from('events').select('*').order('date', { ascending: true });
+  allEvents = res.data || [];
   renderEvents('home-events-list', allEvents, 4);
-  renderEvents('all-events-list',  allEvents, null);
-  const now=new Date(), n=allEvents.filter(e=>{ const d=new Date(e.date+'T00:00:00'); return d.getMonth()===now.getMonth()&&d.getFullYear()===now.getFullYear(); }).length;
-  document.getElementById('stat-events').textContent=n;
+  renderEvents('all-events-list', allEvents, null);
+  var now = new Date();
+  var n = allEvents.filter(function(e) {
+    var d = new Date(e.date + 'T00:00:00');
+    return d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear();
+  }).length;
+  document.getElementById('stat-events').textContent = n;
 }
-function filterEvents(q) { renderEvents('all-events-list', allEvents.filter(e=>e.name.toLowerCase().includes(q.toLowerCase())||e.location?.toLowerCase().includes(q.toLowerCase())), null); }
-
+function filterEvents(q) {
+  var lq = q.toLowerCase();
+  renderEvents('all-events-list', allEvents.filter(function(e) {
+    return e.name.toLowerCase().indexOf(lq) >= 0 || (e.location || '').toLowerCase().indexOf(lq) >= 0;
+  }), null);
+}
 function renderEvents(cid, list, limit) {
-  const el=document.getElementById(cid); if(!el) return;
-  const show=limit?list.slice(0,limit):list;
-  if (!show.length) { el.innerHTML='<div class="empty"><i class="ti ti-calendar-off"></i>No events yet — add the first one!</div>'; return; }
-  el.innerHTML=show.map(ev=>{
-    const {day,mon}=fmtDate(ev.date);
-    const delBtn=canDel(ev.author_id)?`<button class="btn-danger" onclick="(function(e){e.stopPropagation();deleteEvent(${ev.id)})(event)"><i class="ti ti-trash"></i> Delete</button>`:'';
-    const rsvpd=ev.rsvps&&ev.rsvps.includes(currentUser?.id);
-    const rsvpCount=ev.rsvps?ev.rsvps.length:0;
-    return `<div class="event-item">
-      <div class="event-date"><span class="day">${day}</span><span class="mon">${mon}</span></div>
-      <div class="event-info">
-        <div class="name">${esc(ev.name)}</div>
-        <div class="event-meta">
-          <span><i class="ti ti-clock"></i>${esc(ev.time||'TBD')}</span>
-          <span><i class="ti ti-map-pin"></i>${esc(ev.location||'TBD')}</span>
-          ${tag(ev.category)}
-          <span style="color:var(--gray-400)">by ${esc(ev.author_name)}</span>
-          <button class="rsvp-btn ${rsvpd?'rsvpd':''}" onclick="toggleRsvp(${ev.id},this)">${rsvpd?'✓ Going':'RSVP'}</button>
-          <span class="rsvp-count">${rsvpCount} going</span>
-          ${delBtn}
-        </div>
-      </div>
-    </div>`;
-  }).join('');
+  var el = document.getElementById(cid); if (!el) return;
+  var show = limit ? list.slice(0, limit) : list;
+  if (!show.length) { el.innerHTML = '<div class="empty"><i class="ti ti-calendar-off"></i>No events yet.</div>'; return; }
+  var html = '';
+  show.forEach(function(ev) {
+    var fd = fmtDate(ev.date);
+    var rsvps = ev.rsvps || [];
+    var rsvpd = currentUser && rsvps.indexOf(currentUser.id) >= 0;
+    var rsvpCount = rsvps.length;
+    var delBtn = canDel(ev.author_id) ? '<button class="btn-danger" onclick="deleteEvent(' + ev.id + ')"><i class="ti ti-trash"></i> Delete</button>' : '';
+    html += '<div class="event-item">';
+    html += '<div class="event-date"><span class="day">' + fd.day + '</span><span class="mon">' + fd.mon + '</span></div>';
+    html += '<div class="event-info"><div class="name">' + esc(ev.name) + '</div>';
+    html += '<div class="event-meta">';
+    html += '<span><i class="ti ti-clock"></i>' + esc(ev.time || 'TBD') + '</span>';
+    html += '<span><i class="ti ti-map-pin"></i>' + esc(ev.location || 'TBD') + '</span>';
+    html += mkTag(ev.category);
+    html += '<span style="color:var(--gray-400)">by ' + esc(ev.author_name) + '</span>';
+    html += '<button class="rsvp-btn' + (rsvpd ? ' rsvpd' : '') + '" onclick="toggleRsvp(' + ev.id + ',this)">' + (rsvpd ? '&#10003; Going' : 'RSVP') + '</button>';
+    html += '<span class="rsvp-count">' + rsvpCount + ' going</span>';
+    html += delBtn;
+    html += '</div></div></div>';
+  });
+  el.innerHTML = html;
 }
 async function toggleRsvp(eventId, btn) {
-  const ev = allEvents.find(e=>e.id===eventId); if(!ev) return;
-  let rsvps = ev.rsvps||[];
-  const uid = currentUser.id;
-  if (rsvps.includes(uid)) rsvps=rsvps.filter(r=>r!==uid);
-  else rsvps.push(uid);
-  await sb.from('events').update({rsvps}).eq('id',eventId);
-  ev.rsvps=rsvps;
-  renderEvents('home-events-list',allEvents,4);
-  renderEvents('all-events-list',allEvents,null);
-  toast(rsvps.includes(uid)?'You\'re going!':'RSVP removed.');
+  var ev = null;
+  for (var i = 0; i < allEvents.length; i++) { if (allEvents[i].id === eventId) { ev = allEvents[i]; break; } }
+  if (!ev || !currentUser) return;
+  var rsvps = (ev.rsvps || []).slice();
+  var uid = currentUser.id;
+  var idx = rsvps.indexOf(uid);
+  if (idx >= 0) rsvps.splice(idx, 1); else rsvps.push(uid);
+  await sb.from('events').update({ rsvps: rsvps }).eq('id', eventId);
+  ev.rsvps = rsvps;
+  renderEvents('home-events-list', allEvents, 4);
+  renderEvents('all-events-list', allEvents, null);
+  toast(rsvps.indexOf(uid) >= 0 ? "You're going!" : 'RSVP removed.');
 }
 async function deleteEvent(id) {
-  await sb.from('events').delete().eq('id',id);
+  await sb.from('events').delete().eq('id', id);
   toast('Event deleted.');
   await loadEvents();
 }
 async function submitEvent() {
-  const name=document.getElementById('ev-name').value.trim(), date=document.getElementById('ev-date').value;
-  if (!name||!date) { alert('Please fill in event name and date.'); return; }
-  await sb.from('events').insert({ name, date, time:document.getElementById('ev-time').value.trim()||'TBD', location:document.getElementById('ev-loc').value.trim()||'TBD', category:document.getElementById('ev-cat').value, author_id:currentUser.id, author_name:currentProfile?.name||currentUser.email, rsvps:[] });
+  var name = document.getElementById('ev-name').value.trim();
+  var date = document.getElementById('ev-date').value;
+  if (!name || !date) { alert('Please fill in event name and date.'); return; }
+  await sb.from('events').insert({
+    name: name, date: date,
+    time: document.getElementById('ev-time').value.trim() || 'TBD',
+    location: document.getElementById('ev-loc').value.trim() || 'TBD',
+    category: document.getElementById('ev-cat').value,
+    author_id: currentUser.id,
+    author_name: (currentProfile && currentProfile.name) || currentUser.email,
+    rsvps: []
+  });
   closeModal('event-modal');
-  ['ev-name','ev-time','ev-loc'].forEach(i=>document.getElementById(i).value='');
-  document.getElementById('ev-date').value='';
+  ['ev-name','ev-time','ev-loc'].forEach(function(i) { document.getElementById(i).value = ''; });
+  document.getElementById('ev-date').value = '';
   toast('Event posted!');
   await loadEvents();
 }
 
 // FORUM
 async function loadThreads() {
-  const { data } = await sb.from('threads').select('*, replies(count)').order('pinned',{ascending:false}).order('created_at',{ascending:false});
-  allThreads=data||[];
-  renderForum('home-forum-list',allThreads,3);
-  renderForum('all-forum-list',allThreads,null);
-  document.getElementById('stat-threads').textContent=allThreads.length;
+  var res = await sb.from('threads').select('*, replies(count)').order('pinned', { ascending: false }).order('created_at', { ascending: false });
+  allThreads = res.data || [];
+  renderForum('home-forum-list', allThreads, 3);
+  renderForum('all-forum-list', allThreads, null);
+  document.getElementById('stat-threads').textContent = allThreads.length;
 }
-function filterForum(q) { renderForum('all-forum-list',allThreads.filter(t=>t.title.toLowerCase().includes(q.toLowerCase())||(t.body||'').toLowerCase().includes(q.toLowerCase())),null); }
-
+function filterForum(q) {
+  var lq = q.toLowerCase();
+  renderForum('all-forum-list', allThreads.filter(function(t) {
+    return t.title.toLowerCase().indexOf(lq) >= 0 || stripHtml(t.body || '').toLowerCase().indexOf(lq) >= 0;
+  }), null);
+}
 function renderForum(cid, list, limit) {
-  const el=document.getElementById(cid); if(!el) return;
-  const show=limit?list.slice(0,limit):list;
-  if (!show.length) { el.innerHTML='<div class="empty"><i class="ti ti-message-off"></i>No discussions yet — start one!</div>'; return; }
-  el.innerHTML=show.map(th=>{
-    const cnt=th.replies?.[0]?.count||0;
-    const delBtn=canDel(th.author_id)?`<button class="btn-danger" onclick="(function(e){e.stopPropagation();deleteThread(${th.id})})(event)"><i class="ti ti-trash"></i></button>`:'';
-    const pinBtn=isAdmin?`<button class="btn-danger" style="color:var(--gold);" onclick="(function(e){e.stopPropagation();togglePin(${th.id},${th.pinned||false})})(event)" title="${th.pinned?'Unpin':'Pin'}"><i class="ti ti-pin"></i></button>`:'';
-    const pinnedBadge=th.pinned?`<span class="tag tag-pinned"><i class="ti ti-pin" style="font-size:10px;"></i> Pinned</span>`:'';
-    return `<div class="forum-item ${th.pinned?'pinned':''}" onclick="openThread(${th.id})">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;">
-        <div class="forum-q">${esc(th.title)} ${pinnedBadge}</div>
-        <div style="display:flex;gap:4px;">${pinBtn}${delBtn}</div>
-      </div>
-      <div class="forum-preview">${th.body?th.body.replace(/<[^>]+>/g,''):''}</div>
-      <div class="forum-meta">
-        <span><i class="ti ti-user"></i>${esc(th.author_name)}</span>
-        <span><i class="ti ti-message"></i>${cnt} ${cnt===1?'reply':'replies'}</span>
-        <span><i class="ti ti-clock"></i>${timeAgo(th.created_at)}</span>
-        ${tag(th.category)}
-      </div>
-    </div>`;
-  }).join('');
+  var el = document.getElementById(cid); if (!el) return;
+  var show = limit ? list.slice(0, limit) : list;
+  if (!show.length) { el.innerHTML = '<div class="empty"><i class="ti ti-message-off"></i>No discussions yet.</div>'; return; }
+  var html = '';
+  show.forEach(function(th) {
+    var cnt = (th.replies && th.replies[0]) ? th.replies[0].count : 0;
+    var delBtn = canDel(th.author_id) ? '<button class="btn-danger" onclick="stopAndDeleteThread(event,' + th.id + ')"><i class="ti ti-trash"></i></button>' : '';
+    var pinBtn = isAdmin ? '<button class="btn-danger" style="color:var(--gold);" onclick="stopAndPin(event,' + th.id + ',' + (th.pinned ? 'true' : 'false') + ')" title="' + (th.pinned ? 'Unpin' : 'Pin') + '"><i class="ti ti-pin"></i></button>' : '';
+    var pinnedBadge = th.pinned ? '<span class="tag tag-gold" style="display:inline-flex;align-items:center;gap:3px;"><i class="ti ti-pin" style="font-size:10px;"></i> Pinned</span>' : '';
+    html += '<div class="forum-item' + (th.pinned ? ' pinned' : '') + '" onclick="openThread(' + th.id + ')">';
+    html += '<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;">';
+    html += '<div class="forum-q">' + esc(th.title) + ' ' + pinnedBadge + '</div>';
+    html += '<div style="display:flex;gap:4px;">' + pinBtn + delBtn + '</div></div>';
+    html += '<div class="forum-preview">' + esc(stripHtml(th.body || '')) + '</div>';
+    html += '<div class="forum-meta">';
+    html += '<span><i class="ti ti-user"></i>' + esc(th.author_name) + '</span>';
+    html += '<span><i class="ti ti-message"></i>' + cnt + ' ' + (cnt === 1 ? 'reply' : 'replies') + '</span>';
+    html += '<span><i class="ti ti-clock"></i>' + timeAgo(th.created_at) + '</span>';
+    html += mkTag(th.category) + '</div></div>';
+  });
+  el.innerHTML = html;
 }
+function stopAndDeleteThread(e, id) { e.stopPropagation(); deleteThread(id); }
+function stopAndPin(e, id, pinned) { e.stopPropagation(); togglePin(id, pinned); }
 async function togglePin(id, pinned) {
-  await sb.from('threads').update({pinned:!pinned}).eq('id',id);
-  toast(!pinned?'Post pinned!':'Post unpinned.');
+  await sb.from('threads').update({ pinned: !pinned }).eq('id', id);
+  toast(!pinned ? 'Post pinned!' : 'Post unpinned.');
   await loadThreads();
 }
 async function deleteThread(id) {
-  await sb.from('threads').delete().eq('id',id);
-  if (currentThread?.id===id) showForumList();
+  await sb.from('threads').delete().eq('id', id);
+  if (currentThread && currentThread.id === id) showForumList();
   toast('Post deleted.');
   await loadThreads();
 }
 async function submitForum() {
-  const title=document.getElementById('fo-title').value.trim();
-  const body=document.getElementById('fo-body').innerHTML.trim();
+  var title = document.getElementById('fo-title').value.trim();
+  var body  = document.getElementById('fo-body').innerHTML.trim();
   if (!title) { alert('Please enter a question title.'); return; }
-  await sb.from('threads').insert({ title, body:body||null, category:document.getElementById('fo-cat').value, author_id:currentUser.id, author_name:currentProfile?.name||currentUser.email, pinned:false });
+  await sb.from('threads').insert({
+    title: title, body: body || null,
+    category: document.getElementById('fo-cat').value,
+    author_id: currentUser.id,
+    author_name: (currentProfile && currentProfile.name) || currentUser.email,
+    pinned: false
+  });
   closeModal('forum-modal');
-  document.getElementById('fo-title').value='';
-  document.getElementById('fo-body').innerHTML='';
+  document.getElementById('fo-title').value = '';
+  document.getElementById('fo-body').innerHTML = '';
   toast('Question posted!');
   await loadThreads();
 }
 async function openThread(id) {
-  const {data:th}=await sb.from('threads').select('*').eq('id',id).single();
-  const {data:replies}=await sb.from('replies').select('*').eq('thread_id',id).order('created_at');
-  currentThread={...th,replies:replies||[]};
-  document.getElementById('forum-list-view').style.display='none';
-  document.getElementById('forum-thread-view').style.display='block';
+  var res1 = await sb.from('threads').select('*').eq('id', id).single();
+  var res2 = await sb.from('replies').select('*').eq('thread_id', id).order('created_at');
+  currentThread = Object.assign({}, res1.data, { replies: res2.data || [] });
+  document.getElementById('forum-list-view').style.display = 'none';
+  document.getElementById('forum-thread-view').style.display = 'block';
   renderThreadView();
 }
 function renderThreadView() {
-  const t=currentThread;
-  const delBtn=canDel(t.author_id)?`<button class="btn-danger" onclick="deleteThread(${t.id});showForumList();"><i class="ti ti-trash"></i> Delete</button>`:'';
-  let html=`<div class="thread-card">
-    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;gap:8px;">
-      <div class="thread-title">${esc(t.title)}</div>${delBtn}
-    </div>
-    <div class="thread-meta">
-      <span><i class="ti ti-user" style="font-size:13px;margin-right:3px;"></i>${esc(t.author_name)}</span>
-      <span><i class="ti ti-clock" style="font-size:13px;margin-right:3px;"></i>${timeAgo(t.created_at)}</span>
-      ${tag(t.category)}
-    </div>
-    <div class="thread-body">${t.body||'<em style="color:var(--text-muted)">No additional details.</em>'}</div>
-  </div>`;
-  html+=`<div style="font-size:13px;font-weight:600;color:var(--text-muted);margin-bottom:10px;">${t.replies.length} ${t.replies.length===1?'reply':'replies'}</div>`;
-  t.replies.forEach(r=>{
-    const rDel=canDel(r.author_id)?`<button class="btn-danger" onclick="deleteReply(${r.id})"><i class="ti ti-trash"></i></button>`:'';
-    html+=`<div class="reply-card">
-      <div class="reply-author-row">
-        <span><i class="ti ti-user" style="font-size:13px;margin-right:4px;vertical-align:-1px;"></i><strong>${esc(r.author_name)}</strong> <span style="font-weight:400;color:var(--text-muted);">· ${timeAgo(r.created_at)}</span></span>
-        ${rDel}
-      </div>
-      <div class="reply-body">${r.body||''}</div>
-    </div>`;
+  var t = currentThread;
+  var delBtn = canDel(t.author_id) ? '<button class="btn-danger" onclick="deleteThread(' + t.id + ');showForumList();"><i class="ti ti-trash"></i> Delete</button>' : '';
+  var html = '<div class="thread-card">';
+  html += '<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;gap:8px;">';
+  html += '<div class="thread-title">' + esc(t.title) + '</div>' + delBtn + '</div>';
+  html += '<div class="thread-meta">';
+  html += '<span><i class="ti ti-user" style="font-size:13px;margin-right:3px;"></i>' + esc(t.author_name) + '</span>';
+  html += '<span><i class="ti ti-clock" style="font-size:13px;margin-right:3px;"></i>' + timeAgo(t.created_at) + '</span>';
+  html += mkTag(t.category) + '</div>';
+  html += '<div class="thread-body">' + (t.body || '<em style="color:var(--text-muted)">No additional details.</em>') + '</div></div>';
+  html += '<div style="font-size:13px;font-weight:600;color:var(--text-muted);margin-bottom:10px;">' + t.replies.length + ' ' + (t.replies.length === 1 ? 'reply' : 'replies') + '</div>';
+  t.replies.forEach(function(r) {
+    var rDel = canDel(r.author_id) ? '<button class="btn-danger" onclick="deleteReply(' + r.id + ')"><i class="ti ti-trash"></i></button>' : '';
+    html += '<div class="reply-card">';
+    html += '<div class="reply-author-row">';
+    html += '<span><i class="ti ti-user" style="font-size:13px;margin-right:4px;vertical-align:-1px;"></i><strong>' + esc(r.author_name) + '</strong> <span style="font-weight:400;color:var(--text-muted);">&#183; ' + timeAgo(r.created_at) + '</span></span>';
+    html += rDel + '</div>';
+    html += '<div class="reply-body">' + (r.body || '') + '</div></div>';
   });
-  document.getElementById('thread-content').innerHTML=html;
-  document.getElementById('reply-input').innerHTML='';
+  document.getElementById('thread-content').innerHTML = html;
+  document.getElementById('reply-input').innerHTML = '';
 }
 async function deleteReply(id) {
-  await sb.from('replies').delete().eq('id',id);
+  await sb.from('replies').delete().eq('id', id);
   toast('Reply deleted.');
   await openThread(currentThread.id);
   await loadThreads();
 }
 function showForumList() {
-  document.getElementById('forum-list-view').style.display='block';
-  document.getElementById('forum-thread-view').style.display='none';
-  currentThread=null;
+  document.getElementById('forum-list-view').style.display = 'block';
+  document.getElementById('forum-thread-view').style.display = 'none';
+  currentThread = null;
 }
 async function submitReply() {
-  const body=document.getElementById('reply-input').innerHTML.trim();
-  if (!body||body==='<br>') return;
-  await sb.from('replies').insert({ thread_id:currentThread.id, body, author_id:currentUser.id, author_name:currentProfile?.name||currentUser.email });
+  var replyEl = document.getElementById('reply-input');
+  var body = replyEl.innerHTML.trim();
+  var bodyText = replyEl.innerText.trim();
+  if (!bodyText) return;
+  await sb.from('replies').insert({
+    thread_id: currentThread.id, body: body,
+    author_id: currentUser.id,
+    author_name: (currentProfile && currentProfile.name) || currentUser.email
+  });
   toast('Reply posted!');
   await openThread(currentThread.id);
   await loadThreads();
 }
 
 // RESOURCES
-const RES_ICON={pdf:'ri-pdf',video:'ri-video',book:'ri-book',link:'ri-link'};
-const RES_ICON_I={pdf:'ti-file-type-pdf',video:'ti-player-play',book:'ti-book',link:'ti-link'};
+var RES_ICON  = { pdf:'ri-pdf', video:'ri-video', book:'ri-book', link:'ri-link' };
+var RES_ICON_I = { pdf:'ti-file-type-pdf', video:'ti-player-play', book:'ti-book', link:'ti-link' };
 async function loadResources() {
-  const {data}=await sb.from('resources').select('*').order('created_at',{ascending:false});
-  allResources={videos:(data||[]).filter(r=>r.section==='videos'),textbooks:(data||[]).filter(r=>r.section==='textbooks'),other:(data||[]).filter(r=>r.section==='other')};
-  renderResourceSection('videos',allResources.videos);
-  renderResourceSection('textbooks',allResources.textbooks);
-  renderResourceSection('other',allResources.other);
-  document.getElementById('stat-resources').textContent=(data||[]).length;
+  var res = await sb.from('resources').select('*').order('created_at', { ascending: false });
+  var all = res.data || [];
+  allResources = {
+    videos:    all.filter(function(r) { return r.section === 'videos'; }),
+    textbooks: all.filter(function(r) { return r.section === 'textbooks'; }),
+    other:     all.filter(function(r) { return r.section === 'other'; })
+  };
+  renderResourceSection('videos',    allResources.videos);
+  renderResourceSection('textbooks', allResources.textbooks);
+  renderResourceSection('other',     allResources.other);
+  document.getElementById('stat-resources').textContent = all.length;
 }
 function filterResources(sec, q) {
-  const list=(allResources[sec]||[]).filter(r=>r.title.toLowerCase().includes(q.toLowerCase())||(r.notes||'').toLowerCase().includes(q.toLowerCase()));
-  renderResourceSection(sec,list);
+  var lq = q.toLowerCase();
+  var list = (allResources[sec] || []).filter(function(r) {
+    return r.title.toLowerCase().indexOf(lq) >= 0 || (r.notes || '').toLowerCase().indexOf(lq) >= 0;
+  });
+  renderResourceSection(sec, list);
 }
 function renderResourceSection(sec, list) {
-  const el=document.getElementById('res-'+sec+'-list'); if(!el) return;
-  if (!list.length) { el.innerHTML='<div class="empty"><i class="ti ti-files"></i>Nothing here yet — share the first one!</div>'; return; }
-  el.innerHTML=list.map(r=>{
-    const delBtn=canDel(r.author_id)?`<button class="btn-danger" onclick="deleteResource(${r.id})"><i class="ti ti-trash"></i></button>`:'';
-    return `<div class="resource-item">
-      <div class="resource-icon ${RES_ICON[r.type]||'ri-link'}"><i class="ti ${RES_ICON_I[r.type]||'ti-link'}"></i></div>
-      <div class="resource-info">
-        <div class="resource-name">${esc(r.title)}</div>
-        <div class="resource-sub">Shared by ${esc(r.author_name)}${r.notes?' · '+esc(r.notes):''}</div>
-        ${r.link?`<a class="res-link" href="${esc(r.link)}" target="_blank" rel="noopener">${esc(r.link)}</a>`:''}
-      </div>
-      <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">
-        ${r.link?`<a href="${esc(r.link)}" target="_blank" rel="noopener"><i class="ti ti-external-link" style="font-size:18px;color:var(--gray-400);cursor:pointer;"></i></a>`:''}
-        ${delBtn}
-      </div>
-    </div>`;
-  }).join('');
+  var el = document.getElementById('res-' + sec + '-list'); if (!el) return;
+  if (!list.length) { el.innerHTML = '<div class="empty"><i class="ti ti-files"></i>Nothing here yet.</div>'; return; }
+  var html = '';
+  list.forEach(function(r) {
+    var delBtn = canDel(r.author_id) ? '<button class="btn-danger" onclick="deleteResource(' + r.id + ')"><i class="ti ti-trash"></i></button>' : '';
+    html += '<div class="resource-item">';
+    html += '<div class="resource-icon ' + (RES_ICON[r.type] || 'ri-link') + '"><i class="ti ' + (RES_ICON_I[r.type] || 'ti-link') + '"></i></div>';
+    html += '<div class="resource-info"><div class="resource-name">' + esc(r.title) + '</div>';
+    html += '<div class="resource-sub">Shared by ' + esc(r.author_name) + (r.notes ? ' &#183; ' + esc(r.notes) : '') + '</div>';
+    if (r.link) html += '<a class="res-link" href="' + esc(r.link) + '" target="_blank" rel="noopener">' + esc(r.link) + '</a>';
+    html += '</div><div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">';
+    if (r.link) html += '<a href="' + esc(r.link) + '" target="_blank" rel="noopener"><i class="ti ti-external-link" style="font-size:18px;color:var(--gray-400);cursor:pointer;"></i></a>';
+    html += delBtn + '</div></div>';
+  });
+  el.innerHTML = html;
 }
-async function deleteResource(id) { await sb.from('resources').delete().eq('id',id); toast('Resource removed.'); await loadResources(); }
+async function deleteResource(id) { await sb.from('resources').delete().eq('id', id); toast('Resource removed.'); await loadResources(); }
 function selectType(el) {
-  document.querySelectorAll('.type-opt').forEach(o=>o.classList.remove('selected'));
-  el.classList.add('selected'); selResType=el.dataset.type;
-  const sub=document.getElementById('re-sub');
-  if(selResType==='video') sub.value='videos'; else if(selResType==='book') sub.value='textbooks'; else sub.value='other';
+  document.querySelectorAll('.type-opt').forEach(function(o) { o.classList.remove('selected'); });
+  el.classList.add('selected'); selResType = el.dataset.type;
+  var sub = document.getElementById('re-sub');
+  if (selResType === 'video') sub.value = 'videos';
+  else if (selResType === 'book') sub.value = 'textbooks';
+  else sub.value = 'other';
 }
 async function submitResource() {
-  const title=document.getElementById('re-title').value.trim();
+  var title = document.getElementById('re-title').value.trim();
   if (!title) { alert('Please enter a title.'); return; }
-  await sb.from('resources').insert({ title, type:selResType, section:document.getElementById('re-sub').value, link:document.getElementById('re-link').value.trim()||null, notes:document.getElementById('re-notes').value.trim()||null, author_id:currentUser.id, author_name:currentProfile?.name||currentUser.email });
+  await sb.from('resources').insert({
+    title: title, type: selResType,
+    section: document.getElementById('re-sub').value,
+    link:    document.getElementById('re-link').value.trim()  || null,
+    notes:   document.getElementById('re-notes').value.trim() || null,
+    author_id:   currentUser.id,
+    author_name: (currentProfile && currentProfile.name) || currentUser.email
+  });
   closeModal('resource-modal');
-  ['re-title','re-link','re-notes'].forEach(i=>document.getElementById(i).value='');
+  ['re-title','re-link','re-notes'].forEach(function(i) { document.getElementById(i).value = ''; });
   toast('Resource shared!');
   await loadResources();
 }
 
 // CLUBS
 async function loadClubs() {
-  const {data:clubs}=await sb.from('clubs').select('*, club_members(count)').order('created_at');
-  const {data:myMems}=currentUser?await sb.from('club_members').select('club_id').eq('user_id',currentUser.id):{data:[]};
-  const joined=new Set((myMems||[]).map(m=>m.club_id));
-  const el=document.getElementById('clubs-grid'); if(!el) return;
-  if (!clubs?.length) { el.innerHTML='<div class="empty" style="grid-column:1/-1;"><i class="ti ti-users-group"></i>No clubs yet — create the first one!</div>'; return; }
-  el.innerHTML=clubs.map(c=>{
-    const isJoined=joined.has(c.id), cnt=c.club_members?.[0]?.count||0;
-    const delBtn=canDel(c.author_id)?`<button class="btn-danger" onclick="(function(e){e.stopPropagation();deleteClub(${c.id})})(event)"><i class="ti ti-trash"></i></button>`:'';
-    return `<div class="club-item" onclick="openClubDetail(${c.id})">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;">
-        <div class="club-icon-wrap"><i class="ti ti-users-group"></i></div>${delBtn}
-      </div>
-      <div class="club-name">${esc(c.name)}</div>
-      <div class="club-desc">${esc(c.description||'')}</div>
-      <div class="club-foot">
-        <span style="font-size:11px;color:var(--text-muted);"><i class="ti ti-users" style="font-size:12px;vertical-align:-1px;margin-right:2px;"></i>${cnt} members</span>
-        <button class="join-btn ${isJoined?'joined':''}" onclick="(function(e){e.stopPropagation();toggleJoin(${c.id},this)})(event)">${isJoined?'✓ Joined':'Join'}</button>
-      </div>
-    </div>`;
-  }).join('');
+  var res = await sb.from('clubs').select('*, club_members(count)').order('created_at');
+  var myRes = currentUser ? await sb.from('club_members').select('club_id').eq('user_id', currentUser.id) : { data: [] };
+  var joined = {};
+  (myRes.data || []).forEach(function(m) { joined[m.club_id] = true; });
+  var el = document.getElementById('clubs-grid'); if (!el) return;
+  var clubs = res.data || [];
+  if (!clubs.length) { el.innerHTML = '<div class="empty" style="grid-column:1/-1;"><i class="ti ti-users-group"></i>No clubs yet.</div>'; return; }
+  var html = '';
+  clubs.forEach(function(c) {
+    var isJoined = !!joined[c.id];
+    var cnt = (c.club_members && c.club_members[0]) ? c.club_members[0].count : 0;
+    var delBtn = canDel(c.author_id) ? '<button class="btn-danger" onclick="stopAndDeleteClub(event,' + c.id + ')"><i class="ti ti-trash"></i></button>' : '';
+    html += '<div class="club-item" onclick="openClubDetail(' + c.id + ')">';
+    html += '<div style="display:flex;justify-content:space-between;align-items:flex-start;">';
+    html += '<div class="club-icon-wrap"><i class="ti ti-users-group"></i></div>' + delBtn + '</div>';
+    html += '<div class="club-name">' + esc(c.name) + '</div>';
+    html += '<div class="club-desc">' + esc(c.description || '') + '</div>';
+    html += '<div class="club-foot">';
+    html += '<span style="font-size:11px;color:var(--text-muted);"><i class="ti ti-users" style="font-size:12px;vertical-align:-1px;margin-right:2px;"></i>' + cnt + ' members</span>';
+    html += '<button class="join-btn' + (isJoined ? ' joined' : '') + '" onclick="stopAndJoin(event,' + c.id + ',this)">' + (isJoined ? '&#10003; Joined' : 'Join') + '</button>';
+    html += '</div></div>';
+  });
+  el.innerHTML = html;
 }
+function stopAndDeleteClub(e, id) { e.stopPropagation(); deleteClub(id); }
+function stopAndJoin(e, id, btn) { e.stopPropagation(); toggleJoin(id, btn); }
 async function openClubDetail(id) {
-  const {data:c}=await sb.from('clubs').select('*').eq('id',id).single();
-  const {data:mc}=await sb.from('club_members').select('count').eq('club_id',id).single();
-  const {data:me}=await sb.from('club_members').select('club_id').eq('club_id',id).eq('user_id',currentUser.id).maybeSingle();
-  const isJoined=!!me, cnt=mc?.count||0;
-  const delBtn=canDel(c.author_id)?`<button class="btn-danger" onclick="deleteClub(${c.id});closeModal('club-detail-modal');"><i class="ti ti-trash"></i> Delete club</button>`:'';
-  document.getElementById('cd-title').textContent=c.name;
-  document.getElementById('cd-body').innerHTML=`
-    <div style="display:flex;align-items:center;gap:14px;margin-bottom:16px;">
-      <div style="width:50px;height:50px;background:var(--sky);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;"><i class="ti ti-users-group" style="font-size:26px;color:var(--navy);"></i></div>
-      <div><div style="font-size:16px;font-weight:600;color:var(--navy);">${esc(c.name)}</div><div style="font-size:12px;color:var(--text-muted);">Created by ${esc(c.author_name)} · ${cnt} members</div></div>
-    </div>
-    <div><div style="font-size:13px;font-weight:600;color:var(--navy);margin-bottom:6px;">About</div><div style="font-size:13px;line-height:1.7;">${esc(c.description||'')}</div></div>
-    ${c.how_to_join?`<div><div style="font-size:13px;font-weight:600;color:var(--navy);margin-bottom:6px;">How to join</div><div style="font-size:13px;line-height:1.7;">${esc(c.how_to_join)}</div></div>`:''}
-    ${c.link?`<div><div style="font-size:13px;font-weight:600;color:var(--navy);margin-bottom:6px;">Link</div><a href="${esc(c.link)}" target="_blank" rel="noopener" style="font-size:13px;color:var(--navy);word-break:break-all;">${esc(c.link)}</a></div>`:''}`;
-  document.getElementById('cd-footer').innerHTML=`
-    <button class="btn-secondary" onclick="closeModal('club-detail-modal')">Close</button>
-    <button class="join-btn ${isJoined?'joined':''}" style="padding:8px 20px;font-size:13px;" onclick="toggleJoin(${id},this)">${isJoined?'✓ Joined':'Join'}</button>
-    ${delBtn}`;
+  var res1 = await sb.from('clubs').select('*').eq('id', id).single();
+  var res2 = await sb.from('club_members').select('count').eq('club_id', id).single();
+  var res3 = currentUser ? await sb.from('club_members').select('club_id').eq('club_id', id).eq('user_id', currentUser.id).maybeSingle() : { data: null };
+  var c = res1.data, cnt = (res2.data && res2.data.count) || 0, isJoined = !!res3.data;
+  document.getElementById('cd-title').textContent = c.name;
+  var html = '';
+  html += '<div style="display:flex;align-items:center;gap:14px;margin-bottom:16px;">';
+  html += '<div style="width:50px;height:50px;background:var(--sky);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="ti ti-users-group" style="font-size:26px;color:var(--navy);"></i></div>';
+  html += '<div><div style="font-size:16px;font-weight:600;color:var(--navy);">' + esc(c.name) + '</div>';
+  html += '<div style="font-size:12px;color:var(--text-muted);">Created by ' + esc(c.author_name) + ' &#183; ' + cnt + ' members</div></div></div>';
+  html += '<div><div style="font-size:13px;font-weight:600;color:var(--navy);margin-bottom:6px;">About</div>';
+  html += '<div style="font-size:13px;line-height:1.7;">' + esc(c.description || '') + '</div></div>';
+  if (c.how_to_join) {
+    html += '<div><div style="font-size:13px;font-weight:600;color:var(--navy);margin-bottom:6px;">How to join</div>';
+    html += '<div style="font-size:13px;line-height:1.7;">' + esc(c.how_to_join) + '</div></div>';
+  }
+  if (c.link) {
+    html += '<div><div style="font-size:13px;font-weight:600;color:var(--navy);margin-bottom:6px;">Link</div>';
+    html += '<a href="' + esc(c.link) + '" target="_blank" rel="noopener" style="font-size:13px;color:var(--navy);word-break:break-all;">' + esc(c.link) + '</a></div>';
+  }
+  document.getElementById('cd-body').innerHTML = html;
+  var footer = '<button class="btn-secondary" onclick="closeModal(\'club-detail-modal\')">Close</button>';
+  footer += '<button class="join-btn' + (isJoined ? ' joined' : '') + '" style="padding:8px 20px;font-size:13px;" onclick="toggleJoin(' + id + ',this)">' + (isJoined ? '&#10003; Joined' : 'Join') + '</button>';
+  if (canDel(c.author_id)) footer += '<button class="btn-danger" onclick="deleteClub(' + c.id + ');closeModal(\'club-detail-modal\');"><i class="ti ti-trash"></i> Delete club</button>';
+  document.getElementById('cd-footer').innerHTML = footer;
   openModal('club-detail-modal');
 }
 async function toggleJoin(clubId, btn) {
-  const {data:ex}=await sb.from('club_members').select('club_id').eq('club_id',clubId).eq('user_id',currentUser.id).maybeSingle();
-  if (ex) { await sb.from('club_members').delete().eq('club_id',clubId).eq('user_id',currentUser.id); if(btn){btn.classList.remove('joined');btn.textContent='Join';} toast('Left club.'); }
-  else { await sb.from('club_members').insert({club_id:clubId,user_id:currentUser.id}); if(btn){btn.classList.add('joined');btn.textContent='✓ Joined';} toast('Joined club!'); }
+  if (!currentUser) return;
+  var res = await sb.from('club_members').select('club_id').eq('club_id', clubId).eq('user_id', currentUser.id).maybeSingle();
+  if (res.data) {
+    await sb.from('club_members').delete().eq('club_id', clubId).eq('user_id', currentUser.id);
+    if (btn) { btn.classList.remove('joined'); btn.innerHTML = 'Join'; }
+    toast('Left club.');
+  } else {
+    await sb.from('club_members').insert({ club_id: clubId, user_id: currentUser.id });
+    if (btn) { btn.classList.add('joined'); btn.innerHTML = '&#10003; Joined'; }
+    toast('Joined club!');
+  }
   await loadClubs();
 }
-async function deleteClub(id) { await sb.from('clubs').delete().eq('id',id); toast('Club deleted.'); await loadClubs(); }
+async function deleteClub(id) { await sb.from('clubs').delete().eq('id', id); toast('Club deleted.'); await loadClubs(); }
 async function submitClub() {
-  const name=document.getElementById('cl-name').value.trim(), desc=document.getElementById('cl-desc').value.trim();
-  if (!name||!desc) { alert('Please fill in name and description.'); return; }
-  await sb.from('clubs').insert({ name, description:desc, how_to_join:document.getElementById('cl-join').value.trim()||null, link:document.getElementById('cl-link').value.trim()||null, author_id:currentUser.id, author_name:currentProfile?.name||currentUser.email });
+  var name = document.getElementById('cl-name').value.trim();
+  var desc = document.getElementById('cl-desc').value.trim();
+  if (!name || !desc) { alert('Please fill in name and description.'); return; }
+  await sb.from('clubs').insert({
+    name: name, description: desc,
+    how_to_join: document.getElementById('cl-join').value.trim() || null,
+    link:        document.getElementById('cl-link').value.trim() || null,
+    author_id:   currentUser.id,
+    author_name: (currentProfile && currentProfile.name) || currentUser.email
+  });
   closeModal('club-modal');
-  ['cl-name','cl-desc','cl-join','cl-link'].forEach(i=>document.getElementById(i).value='');
+  ['cl-name','cl-desc','cl-join','cl-link'].forEach(function(i) { document.getElementById(i).value = ''; });
   toast('Club created!');
   await loadClubs();
 }
 
 // PROFILE PAGE
 async function loadProfilePage() {
-  const name=currentProfile?.name||currentUser.email, year=currentProfile?.year||'';
-  const initials=name.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);
-  const [evRes, thRes, reRes] = await Promise.all([
-    sb.from('events').select('*').eq('author_id',currentUser.id).order('date',{ascending:true}),
-    sb.from('threads').select('*, replies(count)').eq('author_id',currentUser.id).order('created_at',{ascending:false}),
-    sb.from('resources').select('*').eq('author_id',currentUser.id).order('created_at',{ascending:false}),
+  var name = (currentProfile && currentProfile.name) || currentUser.email;
+  var year = (currentProfile && currentProfile.year) || '';
+  var initials = name.split(' ').map(function(w) { return w[0]; }).join('').toUpperCase().slice(0, 2);
+  var res = await Promise.all([
+    sb.from('events').select('*').eq('author_id', currentUser.id).order('date', { ascending: true }),
+    sb.from('threads').select('*, replies(count)').eq('author_id', currentUser.id).order('created_at', { ascending: false }),
+    sb.from('resources').select('*').eq('author_id', currentUser.id).order('created_at', { ascending: false })
   ]);
-  const evs=evRes.data||[], ths=thRes.data||[], res=reRes.data||[];
-  document.getElementById('profile-hero').innerHTML=`
-    <div class="profile-avatar">${initials}</div>
-    <div>
-      <div class="profile-name">${esc(name)}</div>
-      <div class="profile-meta">${year?year+' · ':''} ${isAdmin?'<span class="admin-badge" style="background:var(--gold);color:var(--navy);">ADMIN</span>':''} ${currentUser.email}</div>
-      <div class="profile-stats">
-        <div class="profile-stat"><span class="n">${evs.length}</span><span class="l">Events</span></div>
-        <div class="profile-stat"><span class="n">${ths.length}</span><span class="l">Posts</span></div>
-        <div class="profile-stat"><span class="n">${res.length}</span><span class="l">Resources</span></div>
-      </div>
-    </div>`;
-  // My events
-  const evEl=document.getElementById('profile-events');
-  evEl.innerHTML=evs.length?evs.map(ev=>{ const {day,mon}=fmtDate(ev.date); return `<div class="event-item"><div class="event-date"><span class="day">${day}</span><span class="mon">${mon}</span></div><div class="event-info"><div class="name">${esc(ev.name)}</div><div class="event-meta"><span><i class="ti ti-clock"></i>${esc(ev.time||'TBD')}</span><span><i class="ti ti-map-pin"></i>${esc(ev.location||'TBD')}</span>${tag(ev.category)}</div></div></div>`; }).join(''):'<div class="empty"><i class="ti ti-calendar-off"></i>No events posted yet.</div>';
-  // My threads
-  const thEl=document.getElementById('profile-threads');
-  thEl.innerHTML=ths.length?ths.map(th=>{ const cnt=th.replies?.[0]?.count||0; return `<div class="forum-item" onclick="showSection('forum');setTimeout(()=>openThread(${th.id}),100)"><div class="forum-q">${esc(th.title)}</div><div class="forum-meta"><span><i class="ti ti-message"></i>${cnt} ${cnt===1?'reply':'replies'}</span><span><i class="ti ti-clock"></i>${timeAgo(th.created_at)}</span>${tag(th.category)}</div></div>`; }).join(''):'<div class="empty"><i class="ti ti-message-off"></i>No posts yet.</div>';
-  // My resources
-  const reEl=document.getElementById('profile-resources');
-  reEl.innerHTML=res.length?res.map(r=>`<div class="resource-item"><div class="resource-icon ${RES_ICON[r.type]||'ri-link'}"><i class="ti ${RES_ICON_I[r.type]||'ti-link'}"></i></div><div class="resource-info"><div class="resource-name">${esc(r.title)}</div><div class="resource-sub">${r.section}${r.notes?' · '+esc(r.notes):''}</div>${r.link?`<a class="res-link" href="${esc(r.link)}" target="_blank">${esc(r.link)}</a>`:''}</div></div>`).join(''):'<div class="empty"><i class="ti ti-files"></i>No resources shared yet.</div>';
+  var evs = res[0].data || [], ths = res[1].data || [], rss = res[2].data || [];
+  var heroHtml = '<div class="profile-avatar">' + initials + '</div><div>';
+  heroHtml += '<div class="profile-name">' + esc(name) + '</div>';
+  heroHtml += '<div class="profile-meta">' + (year ? esc(year) + ' &#183; ' : '') + esc(currentUser.email) + (isAdmin ? ' <span class="admin-badge">ADMIN</span>' : '') + '</div>';
+  heroHtml += '<div class="profile-stats">';
+  heroHtml += '<div class="profile-stat"><span class="n">' + evs.length + '</span><span class="l">Events</span></div>';
+  heroHtml += '<div class="profile-stat"><span class="n">' + ths.length + '</span><span class="l">Posts</span></div>';
+  heroHtml += '<div class="profile-stat"><span class="n">' + rss.length + '</span><span class="l">Resources</span></div>';
+  heroHtml += '</div></div>';
+  document.getElementById('profile-hero').innerHTML = heroHtml;
+  var evEl = document.getElementById('profile-events');
+  if (!evs.length) { evEl.innerHTML = '<div class="empty"><i class="ti ti-calendar-off"></i>No events posted yet.</div>'; }
+  else {
+    var h = '';
+    evs.forEach(function(ev) {
+      var fd = fmtDate(ev.date);
+      h += '<div class="event-item"><div class="event-date"><span class="day">' + fd.day + '</span><span class="mon">' + fd.mon + '</span></div>';
+      h += '<div class="event-info"><div class="name">' + esc(ev.name) + '</div>';
+      h += '<div class="event-meta"><span><i class="ti ti-clock"></i>' + esc(ev.time || 'TBD') + '</span><span><i class="ti ti-map-pin"></i>' + esc(ev.location || 'TBD') + '</span>' + mkTag(ev.category) + '</div></div></div>';
+    });
+    evEl.innerHTML = h;
+  }
+  var thEl = document.getElementById('profile-threads');
+  if (!ths.length) { thEl.innerHTML = '<div class="empty"><i class="ti ti-message-off"></i>No posts yet.</div>'; }
+  else {
+    var h2 = '';
+    ths.forEach(function(th) {
+      var cnt = (th.replies && th.replies[0]) ? th.replies[0].count : 0;
+      h2 += '<div class="forum-item" onclick="showSection(\'forum\');setTimeout(function(){openThread(' + th.id + ')},200)">';
+      h2 += '<div class="forum-q">' + esc(th.title) + '</div>';
+      h2 += '<div class="forum-meta"><span><i class="ti ti-message"></i>' + cnt + ' ' + (cnt === 1 ? 'reply' : 'replies') + '</span><span><i class="ti ti-clock"></i>' + timeAgo(th.created_at) + '</span>' + mkTag(th.category) + '</div></div>';
+    });
+    thEl.innerHTML = h2;
+  }
+  var reEl = document.getElementById('profile-resources');
+  if (!rss.length) { reEl.innerHTML = '<div class="empty"><i class="ti ti-files"></i>No resources shared yet.</div>'; }
+  else {
+    var h3 = '';
+    rss.forEach(function(r) {
+      h3 += '<div class="resource-item"><div class="resource-icon ' + (RES_ICON[r.type] || 'ri-link') + '"><i class="ti ' + (RES_ICON_I[r.type] || 'ti-link') + '"></i></div>';
+      h3 += '<div class="resource-info"><div class="resource-name">' + esc(r.title) + '</div>';
+      h3 += '<div class="resource-sub">' + esc(r.section) + (r.notes ? ' &#183; ' + esc(r.notes) : '') + '</div>';
+      if (r.link) h3 += '<a class="res-link" href="' + esc(r.link) + '" target="_blank">' + esc(r.link) + '</a>';
+      h3 += '</div></div>';
+    });
+    reEl.innerHTML = h3;
+  }
 }
 
-// ADMIN PANEL
+// ADMIN
 async function loadAdminPanel() {
   if (!isAdmin) return;
-  const [uR,eR,tR,rR,cR]=await Promise.all([
+  var results = await Promise.all([
     sb.from('profiles').select('*').order('created_at'),
     sb.from('events').select('*').order('date'),
-    sb.from('threads').select('*').order('created_at',{ascending:false}),
-    sb.from('resources').select('*').order('created_at',{ascending:false}),
-    sb.from('clubs').select('*').order('created_at'),
+    sb.from('threads').select('*').order('created_at', { ascending: false }),
+    sb.from('resources').select('*').order('created_at', { ascending: false }),
+    sb.from('clubs').select('*').order('created_at')
   ]);
-  const [users,events,threads,resources,clubs]=[uR.data||[],eR.data||[],tR.data||[],rR.data||[],cR.data||[]];
-  document.getElementById('adm-n-users').textContent=users.length;
-  document.getElementById('adm-n-events').textContent=events.length;
-  document.getElementById('adm-n-threads').textContent=threads.length;
-  document.getElementById('adm-n-resources').textContent=resources.length;
-  document.getElementById('adm-n-clubs').textContent=clubs.length;
-  document.getElementById('adm-users').innerHTML=users.length?users.map(u=>`<div class="admin-row"><div class="admin-row-info"><strong>${esc(u.name)} ${u.is_admin?'<span class="admin-badge">ADMIN</span>':''}</strong><span>${u.year||'No year'} · Joined ${new Date(u.created_at).toLocaleDateString('en-CA')}</span></div></div>`).join(''):'<div class="empty"><i class="ti ti-users"></i>No users yet.</div>';
-  document.getElementById('adm-events').innerHTML=events.length?events.map(e=>`<div class="admin-row"><div class="admin-row-info"><strong>${esc(e.name)}</strong><span>${e.date} · by ${esc(e.author_name)} · ${(e.rsvps||[]).length} going</span></div><button class="btn-danger" onclick="adminDel('events',${e.id})"><i class="ti ti-trash"></i> Delete</button></div>`).join(''):'<div class="empty"><i class="ti ti-calendar-off"></i>No events.</div>';
-  document.getElementById('adm-threads').innerHTML=threads.length?threads.map(t=>`<div class="admin-row"><div class="admin-row-info"><strong>${esc(t.title)}</strong><span>by ${esc(t.author_name)} · ${timeAgo(t.created_at)}${t.pinned?' · 📌 Pinned':''}</span></div><div style="display:flex;gap:6px;"><button class="btn-danger" style="color:var(--gold);" onclick="togglePin(${t.id},${t.pinned||false})"><i class="ti ti-pin"></i> ${t.pinned?'Unpin':'Pin'}</button><button class="btn-danger" onclick="adminDel('threads',${t.id})"><i class="ti ti-trash"></i> Delete</button></div></div>`).join(''):'<div class="empty"><i class="ti ti-message-off"></i>No threads.</div>';
-  document.getElementById('adm-resources').innerHTML=resources.length?resources.map(r=>`<div class="admin-row"><div class="admin-row-info"><strong>${esc(r.title)}</strong><span>by ${esc(r.author_name)} · ${r.section}</span></div><button class="btn-danger" onclick="adminDel('resources',${r.id})"><i class="ti ti-trash"></i> Delete</button></div>`).join(''):'<div class="empty"><i class="ti ti-files"></i>No resources.</div>';
-  document.getElementById('adm-clubs').innerHTML=clubs.length?clubs.map(c=>`<div class="admin-row"><div class="admin-row-info"><strong>${esc(c.name)}</strong><span>by ${esc(c.author_name)}</span></div><button class="btn-danger" onclick="adminDel('clubs',${c.id})"><i class="ti ti-trash"></i> Delete</button></div>`).join(''):'<div class="empty"><i class="ti ti-users-group"></i>No clubs.</div>';
+  var users = results[0].data || [], events = results[1].data || [], threads = results[2].data || [];
+  var resources = results[3].data || [], clubs = results[4].data || [];
+  document.getElementById('adm-n-users').textContent     = users.length;
+  document.getElementById('adm-n-events').textContent    = events.length;
+  document.getElementById('adm-n-threads').textContent   = threads.length;
+  document.getElementById('adm-n-resources').textContent = resources.length;
+  document.getElementById('adm-n-clubs').textContent     = clubs.length;
+  var uHtml = '';
+  if (!users.length) uHtml = '<div class="empty"><i class="ti ti-users"></i>No users yet.</div>';
+  else users.forEach(function(u) {
+    uHtml += '<div class="admin-row"><div class="admin-row-info"><strong>' + esc(u.name) + (u.is_admin ? ' <span class="admin-badge">ADMIN</span>' : '') + '</strong><span>' + esc(u.year || 'No year') + ' &#183; Joined ' + new Date(u.created_at).toLocaleDateString('en-CA') + '</span></div></div>';
+  });
+  document.getElementById('adm-users').innerHTML = uHtml;
+  var eHtml = '';
+  if (!events.length) eHtml = '<div class="empty"><i class="ti ti-calendar-off"></i>No events.</div>';
+  else events.forEach(function(e) {
+    eHtml += '<div class="admin-row"><div class="admin-row-info"><strong>' + esc(e.name) + '</strong><span>' + e.date + ' &#183; by ' + esc(e.author_name) + ' &#183; ' + (e.rsvps ? e.rsvps.length : 0) + ' going</span></div><button class="btn-danger" onclick="adminDel(\'events\',' + e.id + ')"><i class="ti ti-trash"></i> Delete</button></div>';
+  });
+  document.getElementById('adm-events').innerHTML = eHtml;
+  var tHtml = '';
+  if (!threads.length) tHtml = '<div class="empty"><i class="ti ti-message-off"></i>No threads.</div>';
+  else threads.forEach(function(t) {
+    tHtml += '<div class="admin-row"><div class="admin-row-info"><strong>' + esc(t.title) + '</strong><span>by ' + esc(t.author_name) + ' &#183; ' + timeAgo(t.created_at) + (t.pinned ? ' &#183; &#128204; Pinned' : '') + '</span></div>';
+    tHtml += '<div style="display:flex;gap:6px;"><button class="btn-danger" style="color:var(--gold);" onclick="togglePin(' + t.id + ',' + (t.pinned ? 'true' : 'false') + ')"><i class="ti ti-pin"></i> ' + (t.pinned ? 'Unpin' : 'Pin') + '</button><button class="btn-danger" onclick="adminDel(\'threads\',' + t.id + ')"><i class="ti ti-trash"></i> Delete</button></div></div>';
+  });
+  document.getElementById('adm-threads').innerHTML = tHtml;
+  var rHtml = '';
+  if (!resources.length) rHtml = '<div class="empty"><i class="ti ti-files"></i>No resources.</div>';
+  else resources.forEach(function(r) {
+    rHtml += '<div class="admin-row"><div class="admin-row-info"><strong>' + esc(r.title) + '</strong><span>by ' + esc(r.author_name) + ' &#183; ' + esc(r.section) + '</span></div><button class="btn-danger" onclick="adminDel(\'resources\',' + r.id + ')"><i class="ti ti-trash"></i> Delete</button></div>';
+  });
+  document.getElementById('adm-resources').innerHTML = rHtml;
+  var cHtml = '';
+  if (!clubs.length) cHtml = '<div class="empty"><i class="ti ti-users-group"></i>No clubs.</div>';
+  else clubs.forEach(function(c) {
+    cHtml += '<div class="admin-row"><div class="admin-row-info"><strong>' + esc(c.name) + '</strong><span>by ' + esc(c.author_name) + '</span></div><button class="btn-danger" onclick="adminDel(\'clubs\',' + c.id + ')"><i class="ti ti-trash"></i> Delete</button></div>';
+  });
+  document.getElementById('adm-clubs').innerHTML = cHtml;
 }
 async function adminDel(table, id) {
   if (!confirm('Permanently delete this item?')) return;
-  await sb.from(table).delete().eq('id',id);
+  await sb.from(table).delete().eq('id', id);
   toast('Deleted.');
   await loadAdminPanel();
   await loadAll();
 }
 
-// LOAD ALL
 async function loadAll() {
-  try { await loadEvents();    } catch(e) { console.error('events',e); }
-  try { await loadThreads();   } catch(e) { console.error('threads',e); }
-  try { await loadResources(); } catch(e) { console.error('resources',e); }
-  try { await loadClubs();     } catch(e) { console.error('clubs',e); }
+  try { await loadEvents();    } catch(e) { console.error('events', e); }
+  try { await loadThreads();   } catch(e) { console.error('threads', e); }
+  try { await loadResources(); } catch(e) { console.error('resources', e); }
+  try { await loadClubs();     } catch(e) { console.error('clubs', e); }
 }
 </script>
 </body>
