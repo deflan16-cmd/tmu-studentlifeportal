@@ -516,6 +516,7 @@ let currentProfile = null;
 let isAdmin        = false;
 let currentThread  = null;
 let selResType     = 'pdf';
+let appLoading     = false;
 
 // ── TOAST ──
 function toast(msg, type='success') {
@@ -576,10 +577,8 @@ async function doSignup() {
   });
   if (error) { setAuthMsg(error.message); btn.disabled=false; btn.innerHTML='<i class="ti ti-user-plus"></i> Create account'; return; }
   if (data.user) {
-    // Insert profile (trigger also does this, belt-and-suspenders)
     await sb.from('profiles').upsert({ id: data.user.id, name, year: year||null }, { onConflict: 'id' });
     if (data.session) {
-      // Email confirmation disabled — logged in immediately
       await loadProfile(data.user);
     } else {
       setAuthMsg('Account created! Check your email to confirm, then sign in.', 'success');
@@ -590,18 +589,24 @@ async function doSignup() {
 
 async function doLogout() {
   await sb.auth.signOut();
-  currentUser=null; currentProfile=null; isAdmin=false;
+  currentUser=null; currentProfile=null; isAdmin=false; appLoading=false;
+  document.getElementById('admin-badge').style.display='none';
+  document.getElementById('nav-admin').style.display='none';
   document.getElementById('app').style.display='none';
   document.getElementById('auth-screen').style.display='flex';
+  document.getElementById('li-email').value='';
+  document.getElementById('li-pass').value='';
 }
 
 sb.auth.onAuthStateChange(async (event, session) => {
-  if (event === 'SIGNED_IN' && session?.user && !currentUser) {
+  if (event === 'INITIAL_SESSION' && session?.user) {
     await loadProfile(session.user);
   }
 });
 
 async function loadProfile(user) {
+  if (appLoading) return;
+  appLoading = true;
   try {
     currentUser = user;
     const { data: profile, error } = await sb.from('profiles').select('*').eq('id', user.id).single();
@@ -621,9 +626,10 @@ async function loadProfile(user) {
     document.getElementById('auth-screen').style.display = 'none';
     document.getElementById('app').style.display = 'block';
     await loadAll();
+    appLoading = false;
   } catch(e) {
     console.error('loadProfile failed:', e);
-    // Show app anyway so user is not stuck
+    appLoading = false;
     document.getElementById('auth-screen').style.display = 'none';
     document.getElementById('app').style.display = 'block';
   }
@@ -687,7 +693,7 @@ function renderEvents(cid, list, limit) {
   if (!show.length) { el.innerHTML = '<div class="empty"><i class="ti ti-calendar-off"></i>No events yet — add the first one!</div>'; return; }
   el.innerHTML = show.map(ev => {
     const { day, mon } = fmtDate(ev.date);
-    const delBtn = canDel(ev.author_id) ? `<button class="btn-danger" onclick="event.stopPropagation();deleteEvent(${ev.id})"><i class="ti ti-trash"></i> Delete</button>` : '';
+    const delBtn = canDel(ev.author_id) ? `<button class="btn-danger" onclick="(function(ev){ev.stopPropagation();deleteEvent(${ev.id})"><i class="ti ti-trash"></i> Delete</button>` : '';
     return `<div class="event-item">
       <div class="event-date"><span class="day">${day}</span><span class="mon">${mon}</span></div>
       <div class="event-info">
@@ -746,7 +752,7 @@ function renderForum(cid, list, limit) {
   if (!show.length) { el.innerHTML = '<div class="empty"><i class="ti ti-message-off"></i>No discussions yet — start one!</div>'; return; }
   el.innerHTML = show.map(th => {
     const cnt = th.replies?.[0]?.count || 0;
-    const delBtn = canDel(th.author_id) ? `<button class="btn-danger" onclick="event.stopPropagation();deleteThread(${th.id})"><i class="ti ti-trash"></i></button>` : '';
+    const delBtn = canDel(th.author_id) ? `<button class="btn-danger" onclick="(function(ev){ev.stopPropagation();deleteThread(${th.id})"><i class="ti ti-trash"></i></button>` : '';
     return `<div class="forum-item" onclick="openThread(${th.id})">
       <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;">
         <div class="forum-q">${esc(th.title)}</div>${delBtn}
@@ -924,14 +930,14 @@ async function submitResource() {
 // ── CLUBS ──
 async function loadClubs() {
   const { data: clubs } = await sb.from('clubs').select('*, club_members(count)').order('created_at');
-  const { data: myMems } = await sb.from('club_members').select('club_id').eq('user_id', currentUser.id);
+  const { data: myMems } = currentUser ? await sb.from('club_members').select('club_id').eq('user_id', currentUser.id) : { data: [] };
   const joined = new Set((myMems||[]).map(m => m.club_id));
   const el = document.getElementById('clubs-grid'); if (!el) return;
   if (!clubs?.length) { el.innerHTML = '<div class="empty" style="grid-column:1/-1;"><i class="ti ti-users-group"></i>No clubs yet — create the first one!</div>'; return; }
   el.innerHTML = clubs.map(c => {
     const isJoined = joined.has(c.id);
     const cnt = c.club_members?.[0]?.count || 0;
-    const delBtn = canDel(c.author_id) ? `<button class="btn-danger" onclick="event.stopPropagation();deleteClub(${c.id})"><i class="ti ti-trash"></i></button>` : '';
+    const delBtn = canDel(c.author_id) ? `<button class="btn-danger" onclick="(function(ev){ev.stopPropagation();deleteClub(${c.id})"><i class="ti ti-trash"></i></button>` : '';
     return `<div class="club-item" onclick="openClubDetail(${c.id})">
       <div style="display:flex;justify-content:space-between;align-items:flex-start;">
         <div class="club-icon-wrap"><i class="ti ti-users-group"></i></div>${delBtn}
@@ -940,7 +946,7 @@ async function loadClubs() {
       <div class="club-desc">${esc(c.description||'')}</div>
       <div class="club-foot">
         <span style="font-size:11px;color:var(--text-muted);"><i class="ti ti-users" style="font-size:12px;vertical-align:-1px;margin-right:2px;"></i>${cnt} members</span>
-        <button class="join-btn ${isJoined?'joined':''}" onclick="event.stopPropagation();toggleJoin(${c.id},this)">${isJoined?'✓ Joined':'Join'}</button>
+        <button class="join-btn ${isJoined?'joined':''}" onclick="(function(ev){ev.stopPropagation();toggleJoin(${c.id},this)">${isJoined?'✓ Joined':'Join'}</button>
       </div>
     </div>`;
   }).join('');
